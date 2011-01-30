@@ -2,8 +2,52 @@
 <html>
 <head>
     <title>Home Page</title>
+
+    <!-- CSS -->
     <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/blueprint/screen.css")" rel="stylesheet" type="text/css" media="screen, projection" />
+
+    <!-- JS -->
     <script src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.form.js")" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        function showLogin() {
+            $("#signInDialog").dialog({
+                draggable: false,
+                resizable: false,
+                width: '548px',
+                buttons: {
+                    "Sign In": function(){ 
+                        alert('Going to try to sign in') 
+                    }
+                }
+            });
+        }
+
+        $(function () {
+            $.ajaxSetup({ cache: false });
+
+            // Add a handler for anytime an ajax error occurs and see if its a 403 (that was thrown by an ajax controller action).
+//                $("body").ajaxError(function (event, request, ajaxOptions, thrownError) {
+//                    if (request.status == 403) {
+//                        showLogin();
+//                    }
+//                    else {
+//                        alert('An unexpected error occurred on the server.  StatusCode: ' + request.status + ', Error: ' + request.responseText);
+//                    }
+//                });
+
+            // See if the user has been authenticated.
+            var userIsAuthenticated = $("input[name*='userIsAuthenticated']").val();
+            console.log(userIsAuthenticated);
+            if (userIsAuthenticated != "True") {
+                showLogin();
+            }
+        });
+    </script>
 </head>
 
 <body>
@@ -12,10 +56,6 @@
         <div id="header">
             <div id="title">
                 <h1>My MVC Application</h1>
-            </div>
-
-            <div id="logindisplay">
-                @Html.Partial("_LogOnPartial")
             </div>
         </div>
 
@@ -29,6 +69,8 @@
         </div>
     </div>
 
-    @Html.Hidden("isAuthenticated", Request.IsAuthenticated)
+    @Html.Hidden("userIsAuthenticated", Request.IsAuthenticated)
+
+    @Html.Partial("_SignInDialog")
 </body>
 </html>
