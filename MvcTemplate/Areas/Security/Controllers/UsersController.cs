@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Security;
 using MvcTemplate.Models;
 
@@ -21,7 +17,6 @@ namespace MvcTemplate.Areas.Security.Controllers
                 {
                     return Json(new { Success = true });
                 }
-
             }
 
             return Json(new { Success = false });

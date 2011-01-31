@@ -32,30 +32,39 @@
     </style>
 
     <script type="text/javascript">
-        var postOptions = {
-            dataType: 'json',
-            beforeSubmit: function () {
-            },
-            success: function (data) {
-                alert("You're signed in!");
-            }
-        };
-
         function showLogin() {
             $("#signInDialog").dialog({
                 modal: true,
                 draggable: false,
                 resizable: false,
                 width: '548px',
-                buttons: {
-                    "New User": function () {
-                        $(this).dialog('close');
-                        showNewUser();
+                buttons: [
+                    {
+                        text: "New User",
+                        click: function () {
+                            $(this).dialog('close');
+                            showNewUser();
+                        }
                     },
-                    "Sign In": function () {
-                        $("#signInForm").ajaxSubmit(postOptions);
+                    {
+                        text: "Sign In",
+                        click: function () {
+                            $("#signInForm").ajaxSubmit({
+                                dataType: 'json',
+                                beforeSubmit: function () {
+                                },
+                                success: function (data) {
+                                    if (data.Success) {
+                                        alert("Success!");
+                                    }
+                                    else {
+                                        alert("Fail!");
+                                    }
+                                }
+                            });
+                        }
                     }
-                },
+                ],
                 create: function (event, ui) {
                     $(".ui-dialog-titlebar-close").hide()
                     $("#signInForm").clearForm();
@@ -69,11 +78,26 @@
                 draggable: false,
                 resizable: false,
                 width: '548px',
-                buttons: {
-                    "Create User": function () {
-                        $("#newUserForm").ajaxSubmit(postOptions);
+                buttons: [
+                    {
+                        text: "Create User",
+                        click: function () {
+                            $("#newUserForm").ajaxSubmit({
+                                dataType: 'json',
+                                beforeSubmit: function () {
+                                },
+                                success: function (data) {
+                                    if (data.Success) {
+                                        alert("Success!");
+                                    }
+                                    else {
+                                        alert("Fail!");
+                                    }
+                                }
+                            })
+                        }
                     }
-                },
+                ],
                 create: function (event, ui) {
                     $(".ui-dialog-titlebar-close").hide();
                     $("#newUserForm").clearForm();
