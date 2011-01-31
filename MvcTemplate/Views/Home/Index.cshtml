@@ -49,13 +49,16 @@
                     {
                         text: "Sign In",
                         click: function () {
+                            var dialog = $(this);
                             $("#signInForm").ajaxSubmit({
                                 dataType: 'json',
                                 beforeSubmit: function () {
                                 },
                                 success: function (data) {
                                     if (data.Success) {
-                                        alert("Success!");
+                                        //alert("Success!");
+                                        dialog.dialog('close');
+                                        showSecurityMenu();
                                     }
                                     else {
                                         alert("Fail!");
@@ -105,26 +108,33 @@
             });
         }
 
+        function showSecurityMenu() {
+            $('#securityMenu').show();
+        }
+
         $(function () {
             $.ajaxSetup({ cache: false });
 
-            $("#securityMenu").buttonset();
+            $("#securityMenu").hide().buttonset();
 
             // Add a handler for anytime an ajax error occurs and see if its a 403 (that was thrown by an ajax controller action).
-//                $("body").ajaxError(function (event, request, ajaxOptions, thrownError) {
-//                    if (request.status == 403) {
-//                        showLogin();
-//                    }
-//                    else {
-//                        alert('An unexpected error occurred on the server.  StatusCode: ' + request.status + ', Error: ' + request.responseText);
-//                    }
-//                });
+            //                $("body").ajaxError(function (event, request, ajaxOptions, thrownError) {
+            //                    if (request.status == 403) {
+            //                        showLogin();
+            //                    }
+            //                    else {
+            //                        alert('An unexpected error occurred on the server.  StatusCode: ' + request.status + ', Error: ' + request.responseText);
+            //                    }
+            //                });
 
             // See if the user has been authenticated.
             var userIsAuthenticated = $("input[name*='userIsAuthenticated']").val();
             console.log(userIsAuthenticated);
             if (userIsAuthenticated != "True") {
                 showLogin();
+            }
+            else {
+                showSecurityMenu();
             }
         });
     </script>
