@@ -16,13 +16,17 @@
     <script type="text/javascript">
         function showLogin() {
             $("#signInDialog").dialog({
+                modal: true,
                 draggable: false,
                 resizable: false,
                 width: '548px',
                 buttons: {
                     "Sign In": function(){ 
-                        alert('Going to try to sign in') 
+                        alert('Going to try to sign in')
                     }
+                },
+                create: function (event, ui) { 
+                    $(".ui-dialog-titlebar-close").hide()
                 }
             });
         }
