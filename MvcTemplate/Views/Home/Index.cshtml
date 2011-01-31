@@ -32,6 +32,15 @@
     </style>
 
     <script type="text/javascript">
+        var postOptions = {
+            dataType: 'json',
+            beforeSubmit: function () {
+            },
+            success: function (data) {
+                alert("You're signed in!");
+            }
+        };
+
         function showLogin() {
             $("#signInDialog").dialog({
                 modal: true,
@@ -39,12 +48,35 @@
                 resizable: false,
                 width: '548px',
                 buttons: {
-                    "Sign In": function(){ 
-                        alert('Going to try to sign in')
+                    "New User": function () {
+                        $(this).dialog('close');
+                        showNewUser();
+                    },
+                    "Sign In": function () {
+                        $("#signInForm").ajaxSubmit(postOptions);
                     }
                 },
-                create: function (event, ui) { 
+                create: function (event, ui) {
                     $(".ui-dialog-titlebar-close").hide()
+                    $("#signInForm").clearForm();
+                }
+            });
+        }
+
+        function showNewUser() {
+            $("#newUserDialog").dialog({
+                modal: true,
+                draggable: false,
+                resizable: false,
+                width: '548px',
+                buttons: {
+                    "Create User": function () {
+                        $("#newUserForm").ajaxSubmit(postOptions);
+                    }
+                },
+                create: function (event, ui) {
+                    $(".ui-dialog-titlebar-close").hide();
+                    $("#newUserForm").clearForm();
                 }
             });
         }
@@ -91,13 +123,13 @@
             <p>
                 To learn more about ASP.NET MVC visit <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
             </p>
-            <div id="footer">
-            </div>
         </div>
     </div>
 
     @Html.Hidden("userIsAuthenticated", Request.IsAuthenticated)
 
     @Html.Partial("_SignInDialog")
+
+    @Html.Partial("_NewUserDialog")
 </body>
 </html>

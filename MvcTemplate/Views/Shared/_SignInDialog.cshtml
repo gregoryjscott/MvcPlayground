@@ -1,19 +1,11 @@
 ﻿<script type="text/javascript">
     $(function () {
-        var postOptions = {
-            dataType: 'json',
-            beforeSubmit: function () {
-            },
-            success: function (data) {
-                alert("You're signed in!");
-            }
-        };
-        $('#signInForm').clearForm().ajaxForm(postOptions);
+//        $('#signInForm').clearForm();
     });
 </script>
 
 <div id="signInDialog" style="display:none" title="Please sign in below.">
-    <form id="signInForm" action="/Settings/Users/Login/" method="post" class="container size-12">
+    <form id="signInForm" action="/Security/UserSessions/Create/" method="post" class="container size-12">
         @*<div id="loginErrorMessage" class="span-12 last validation-summary-errors">
             <span>Login was unsuccessful. Please try again.</span>
         </div>*@
