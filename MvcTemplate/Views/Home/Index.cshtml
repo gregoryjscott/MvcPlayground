@@ -13,6 +13,24 @@
     <script src="@Url.Content("~/Scripts/jquery-ui.min.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/jquery.form.js")" type="text/javascript"></script>
 
+    <style type="text/css">
+        #header
+        {
+            height: 100px;
+        }
+        
+        #title 
+        {
+            display:block;
+            float: left;
+        }            
+        
+        #securityMenu 
+        {
+            float: right;
+        }            
+    </style>
+
     <script type="text/javascript">
         function showLogin() {
             $("#signInDialog").dialog({
@@ -33,6 +51,8 @@
 
         $(function () {
             $.ajaxSetup({ cache: false });
+
+            $("#securityMenu").buttonset();
 
             // Add a handler for anytime an ajax error occurs and see if its a 403 (that was thrown by an ajax controller action).
 //                $("body").ajaxError(function (event, request, ajaxOptions, thrownError) {
@@ -58,9 +78,12 @@
     <div class="page">
 
         <div id="header">
-            <div id="title">
-                <h1>My MVC Application</h1>
-            </div>
+            <h1 id="title">My MVC Application</h1>
+
+		    <div id="securityMenu">
+			    <input type="radio" id="changePasswordMenuItem" name="securityMenu" /><label for="changePasswordMenuItem">Change Password</label>
+			    <input type="radio" id="logoffMenuItem" name="securityMenu" /><label for="logoffMenuItem">Logoff {user}</label>
+		    </div>
         </div>
 
         <div id="main">
