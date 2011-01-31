@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using MvcTemplate.Areas.Security.Models.UserSessions;
 using MvcTemplate.Models;
 
 namespace MvcTemplate.Areas.Security.Controllers

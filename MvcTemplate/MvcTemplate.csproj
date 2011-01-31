@@ -59,6 +59,8 @@
   <ItemGroup>
     <Compile Include="Areas\Security\Controllers\UsersController.cs" />
     <Compile Include="Areas\Security\Controllers\UserSessionsController.cs" />
+    <Compile Include="Areas\Security\Models\UserSessions\LogOnModel.cs" />
+    <Compile Include="Areas\Security\Models\Users\RegisterModel.cs" />
     <Compile Include="Areas\Security\SecurityAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -145,7 +147,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Security\Models\" />
+    <Folder Include="Areas\Security\Tasks\UserSessions\" />
+    <Folder Include="Areas\Security\Tasks\Users\" />
     <Folder Include="Areas\Security\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
