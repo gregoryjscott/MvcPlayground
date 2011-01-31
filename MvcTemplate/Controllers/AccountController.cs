@@ -7,8 +7,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
+using MvcTemplate.Areas.Security.Models.Sessions;
 using MvcTemplate.Areas.Security.Models.Users;
-using MvcTemplate.Areas.Security.Models.UserSessions;
 using MvcTemplate.Models;
 
 namespace MvcTemplate.Controllers

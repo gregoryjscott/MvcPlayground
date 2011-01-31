@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MvcTemplate.Areas.Security.Models.UserSessions
+namespace MvcTemplate.Areas.Security.Models.Sessions
 {
     public class SessionDetail
     {

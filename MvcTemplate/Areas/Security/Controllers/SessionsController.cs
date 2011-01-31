@@ -1,10 +1,10 @@
 ﻿using System.Web.Mvc;
-using MvcTemplate.Areas.Security.Models.UserSessions;
+using MvcTemplate.Areas.Security.Models.Sessions;
 using MvcTemplate.Models;
 
 namespace MvcTemplate.Areas.Security.Controllers
 {
-    public class UserSessionsController : Controller
+    public class SessionsController : Controller
     {
         [HttpPost]
         public ActionResult Create(SessionDetail sessionDetail)

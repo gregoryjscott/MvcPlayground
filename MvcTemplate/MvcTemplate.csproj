@@ -34,6 +34,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Simpler">
+      <HintPath>..\References\Simpler.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages" />
     <Reference Include="System.Web.Helpers" />
@@ -58,8 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\Security\Controllers\UsersController.cs" />
-    <Compile Include="Areas\Security\Controllers\UserSessionsController.cs" />
-    <Compile Include="Areas\Security\Models\UserSessions\SessionDetail.cs" />
+    <Compile Include="Areas\Security\Controllers\SessionsController.cs" />
+    <Compile Include="Areas\Security\Models\Sessions\SessionDetail.cs" />
     <Compile Include="Areas\Security\Models\Users\UserDetail.cs" />
     <Compile Include="Areas\Security\SecurityAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -147,7 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Security\Tasks\UserSessions\" />
+    <Folder Include="Areas\Security\Tasks\Sessions\" />
     <Folder Include="Areas\Security\Tasks\Users\" />
     <Folder Include="Areas\Security\Views\Shared\" />
   </ItemGroup>
