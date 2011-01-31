@@ -7,7 +7,7 @@ namespace MvcTemplate.Areas.Security.Controllers
 {
     public class UsersController : Controller
     {
-        public ActionResult Create(RegisterModel model)
+        public ActionResult Create(UserDetail model)
         {
             if (ModelState.IsValid)
             {

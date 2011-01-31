@@ -4,7 +4,7 @@ using MvcTemplate.Models;
 
 namespace MvcTemplate.Areas.Security.Models.Users
 {
-    public class RegisterModel
+    public class UserDetail
     {
         [Required]
         [Display(Name = "User name")]

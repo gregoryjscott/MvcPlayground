@@ -7,15 +7,15 @@ namespace MvcTemplate.Areas.Security.Controllers
     public class UserSessionsController : Controller
     {
         [HttpPost]
-        public ActionResult Create(LogOnModel logOnModel)
+        public ActionResult Create(SessionDetail sessionDetail)
         {
             var membershipService = new AccountMembershipService();
-            if (ModelState.IsValid && membershipService.ValidateUser(logOnModel.UserName, logOnModel.Password))
+            if (ModelState.IsValid && membershipService.ValidateUser(sessionDetail.UserName, sessionDetail.Password))
             {
                 var formsService = new FormsAuthenticationService();
-                formsService.SignIn(logOnModel.UserName, false);
+                formsService.SignIn(sessionDetail.UserName, false);
 
-                return Json(new { Success = true, User = logOnModel.UserName });
+                return Json(new { Success = true, User = sessionDetail.UserName });
             }
 
             return Json(new { Success = false });

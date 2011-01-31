@@ -37,7 +37,7 @@ namespace MvcTemplate.Controllers
         }
 
         [HttpPost]
-        public ActionResult LogOn(LogOnModel model, string returnUrl)
+        public ActionResult LogOn(SessionDetail model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace MvcTemplate.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(RegisterModel model)
+        public ActionResult Register(UserDetail model)
         {
             if (ModelState.IsValid)
             {

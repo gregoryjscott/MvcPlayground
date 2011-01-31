@@ -2,7 +2,7 @@
 
 namespace MvcTemplate.Areas.Security.Models.UserSessions
 {
-    public class LogOnModel
+    public class SessionDetail
     {
         [Required]
         [Display(Name = "User name")]

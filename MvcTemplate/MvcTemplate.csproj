@@ -59,8 +59,8 @@
   <ItemGroup>
     <Compile Include="Areas\Security\Controllers\UsersController.cs" />
     <Compile Include="Areas\Security\Controllers\UserSessionsController.cs" />
-    <Compile Include="Areas\Security\Models\UserSessions\LogOnModel.cs" />
-    <Compile Include="Areas\Security\Models\Users\RegisterModel.cs" />
+    <Compile Include="Areas\Security\Models\UserSessions\SessionDetail.cs" />
+    <Compile Include="Areas\Security\Models\Users\UserDetail.cs" />
     <Compile Include="Areas\Security\SecurityAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
