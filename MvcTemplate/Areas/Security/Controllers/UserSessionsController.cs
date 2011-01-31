@@ -14,7 +14,7 @@ namespace MvcTemplate.Areas.Security.Controllers
                 var formsService = new FormsAuthenticationService();
                 formsService.SignIn(logOnModel.UserName, false);
 
-                return Json(new { Success = true });
+                return Json(new { Success = true, User = logOnModel.UserName });
             }
 
             return Json(new { Success = false });

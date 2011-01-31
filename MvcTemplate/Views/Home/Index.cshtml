@@ -4,7 +4,6 @@
     <title>Home Page</title>
 
     <!-- CSS -->
-    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/themes/aristo/jquery-ui.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/blueprint/grid.css")" rel="stylesheet" type="text/css" media="screen, projection" />
 
@@ -28,7 +27,66 @@
         #securityMenu 
         {
             float: right;
-        }            
+        }     
+        
+        /* Styles for validation helpers
+        -----------------------------------------------------------*/
+        .field-validation-error
+        {
+            color: #ff0000;
+        }
+
+        .field-validation-valid
+        {
+            display: none;
+        }
+
+        .input-validation-error
+        {
+            border: 1px solid #ff0000;
+            background-color: #ffeeee;
+        }
+
+        .validation-summary-errors
+        {
+            font-weight: bold;
+            color: #ff0000;
+        }
+
+        .validation-summary-valid
+        {
+            display: none;
+        }
+
+        /* Styles for editor and display helpers
+        ----------------------------------------------------------*/
+        .display-label,
+        .editor-label
+        {
+            margin: 1em 0 0 0;
+        }
+
+        .display-field,
+        .editor-field
+        {
+            margin:0.5em 0 0 0;
+        }
+
+        .text-box
+        {
+            width: 30em;
+        }
+
+        .text-box.multi-line
+        {
+            height: 6.5em;
+        }
+
+        .tri-state
+        {
+            width: 6em;
+        }
+       
     </style>
 
     <script type="text/javascript">
@@ -58,7 +116,7 @@
                                     if (data.Success) {
                                         //alert("Success!");
                                         dialog.dialog('close');
-                                        showSecurityMenu();
+                                        showSecurityMenu(data.User);
                                     }
                                     else {
                                         alert("Fail!");
@@ -108,14 +166,13 @@
             });
         }
 
-        function showSecurityMenu() {
-            $('#securityMenu').show();
+        function showSecurityMenu(user) {
+            $('#logoffMenuItemLabel').text('Logoff ' + user);
+            $("#securityMenu").buttonset().show();
         }
 
         $(function () {
             $.ajaxSetup({ cache: false });
-
-            $("#securityMenu").hide().buttonset();
 
             // Add a handler for anytime an ajax error occurs and see if its a 403 (that was thrown by an ajax controller action).
             //                $("body").ajaxError(function (event, request, ajaxOptions, thrownError) {
@@ -134,7 +191,8 @@
                 showLogin();
             }
             else {
-                showSecurityMenu();
+                var authenticatedUser = $("input[name*='authenticatedUser']").val();
+                showSecurityMenu(authenticatedUser);
             }
         });
     </script>
@@ -146,9 +204,9 @@
         <div id="header">
             <h1 id="title">My MVC Application</h1>
 
-		    <div id="securityMenu">
+		    <div id="securityMenu" style="display:none" >
 			    <input type="radio" id="changePasswordMenuItem" name="securityMenu" /><label for="changePasswordMenuItem">Change Password</label>
-			    <input type="radio" id="logoffMenuItem" name="securityMenu" /><label for="logoffMenuItem">Logoff {user}</label>
+			    <input type="radio" id="logoffMenuItem" name="securityMenu" /><label id="logoffMenuItemLabel" for="logoffMenuItem">Logoff {user}</label>
 		    </div>
         </div>
 
@@ -161,6 +219,11 @@
     </div>
 
     @Html.Hidden("userIsAuthenticated", Request.IsAuthenticated)
+
+    @if (Request.IsAuthenticated)
+    {
+        @Html.Hidden("authenticatedUser", Context.User.Identity.Name)
+    }
 
     @Html.Partial("_SignInDialog")
 
