@@ -72,7 +72,7 @@
     <Compile Include="Areas\Security\SecurityAreaRegistration.cs" />
     <Compile Include="Areas\Security\Tasks\Sessions\CreateSession.cs" />
     <Compile Include="Areas\Security\Tasks\Users\CreateUser.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="_to_be_deleted\Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -147,10 +147,10 @@
     <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
-    <Content Include="Views\Account\ChangePassword.cshtml" />
-    <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
-    <Content Include="Views\Account\LogOn.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="_to_be_deleted\Views\Account\ChangePassword.cshtml" />
+    <Content Include="_to_be_deleted\Views\Account\ChangePasswordSuccess.cshtml" />
+    <Content Include="_to_be_deleted\Views\Account\LogOn.cshtml" />
+    <Content Include="_to_be_deleted\Views\Account\Register.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Web.config" />
   </ItemGroup>
