@@ -1,20 +1,24 @@
 ﻿using System.Web.Mvc;
 using System.Web.Security;
 using MvcTemplate.Areas.Security.Models.Users;
-using MvcTemplate.Models;
+using MvcTemplate.Areas.Security.Tasks.Users;
+using Simpler;
 
 namespace MvcTemplate.Areas.Security.Controllers
 {
     public class UsersController : Controller
     {
-        public ActionResult Create(UserDetail model)
+        public ActionResult Create(UserDetail userDetail)
         {
             if (ModelState.IsValid)
             {
-                var membershipService = new AccountMembershipService();
-                MembershipCreateStatus createStatus = membershipService.CreateUser(model.UserName, model.Password, model.Email);
+                //var membershipService = new AccountMembershipService();
+                //MembershipCreateStatus createStatus = membershipService.CreateUser(model.UserName, model.Password, model.Email);
+                var createUser = TaskFactory<CreateUser>.Create();
+                createUser.UserDetail = userDetail;
+                createUser.Execute();
 
-                if (createStatus == MembershipCreateStatus.Success)
+                if (createUser.MembershipCreateStatus == MembershipCreateStatus.Success)
                 {
                     return Json(new { Success = true });
                 }
