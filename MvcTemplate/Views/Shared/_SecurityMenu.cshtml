@@ -1,4 +1,15 @@
-﻿<div id="securityMenu" style="display:none" >
+﻿<script type="text/javascript">
+    $(function () {
+        $('#logoffMenuItem').click(function () {
+            $.post('/Security/Sessions/Delete', function () {
+                showLogin();
+            });
+            return false;
+        });
+    });
+</script>
+
+<div id="securityMenu" style="display:none" >
 @*	<input type="radio" id="changePasswordMenuItem" name="securityMenu" /><label for="changePasswordMenuItem">Change Password</label>*@
 	<input type="radio" id="logoffMenuItem" name="securityMenu" /><label id="logoffMenuItemLabel" for="logoffMenuItem">Logoff</label>
 </div>

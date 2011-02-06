@@ -1,10 +1,4 @@
-﻿<script type="text/javascript">
-    $(function () {
-//        $('#signInForm').clearForm();
-    });
-</script>
-
-<div id="signInDialog" style="display:none" title="Please sign in below.">
+﻿<div id="signInDialog" style="display:none" title="Please sign in below.">
     <form id="signInForm" action="/Security/Sessions/Create/" method="post" class="container size-12">
         @*<div id="loginErrorMessage" class="span-12 last validation-summary-errors">
             <span>Login was unsuccessful. Please try again.</span>
@@ -15,9 +9,6 @@
             <input id="UserName" class="span-6" name="UserName" type="text" value="" />
             <label for="Password" class="span-6">Password</label>
             <input id="Password" class="span-6" name="Password" type="password" />
-            @*<div style="text-align: right;">
-                <input type="submit" value="Login" />
-            </div>*@
         </div>
     </form>
 </div>
