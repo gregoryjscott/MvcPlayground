@@ -72,6 +72,9 @@
     <Compile Include="Areas\Security\SecurityAreaRegistration.cs" />
     <Compile Include="Areas\Security\Tasks\Sessions\CreateSession.cs" />
     <Compile Include="Areas\Security\Tasks\Users\CreateUser.cs" />
+    <Compile Include="Filters\AjaxAuthorizeAttribute.cs" />
+    <Compile Include="Filters\HandleAjaxExceptionAttribute.cs" />
+    <Compile Include="Results\HttpForbiddenResult.cs" />
     <Compile Include="_to_be_deleted\Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">

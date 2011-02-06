@@ -2,10 +2,13 @@
 using System.Web.Security;
 using MvcTemplate.Areas.Security.Models.Users;
 using MvcTemplate.Areas.Security.Tasks.Users;
+using MvcTemplate.Filters;
 using Simpler;
 
 namespace MvcTemplate.Areas.Security.Controllers
 {
+    [AjaxAuthorize]
+    [HandleAjaxException]
     public class UsersController : Controller
     {
         public ActionResult Create(UserDetail userDetail)

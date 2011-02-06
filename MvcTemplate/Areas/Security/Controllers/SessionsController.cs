@@ -2,10 +2,12 @@
 using MvcTemplate.Areas.Security.Models;
 using MvcTemplate.Areas.Security.Models.Sessions;
 using MvcTemplate.Areas.Security.Tasks.Sessions;
+using MvcTemplate.Filters;
 using Simpler;
 
 namespace MvcTemplate.Areas.Security.Controllers
 {
+    [HandleAjaxException]
     public class SessionsController : Controller
     {
         [HttpPost]
