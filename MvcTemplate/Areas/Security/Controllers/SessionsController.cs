@@ -2,7 +2,6 @@
 using MvcTemplate.Areas.Security.Models;
 using MvcTemplate.Areas.Security.Models.Sessions;
 using MvcTemplate.Areas.Security.Tasks.Sessions;
-using MvcTemplate.Models;
 using Simpler;
 
 namespace MvcTemplate.Areas.Security.Controllers
@@ -20,14 +19,6 @@ namespace MvcTemplate.Areas.Security.Controllers
 
                 return Json(new { Success = true, User = sessionDetail.UserName });
             }
-            //var membershipService = new AccountMembershipService();
-            //if (ModelState.IsValid && membershipService.ValidateUser(sessionDetail.UserName, sessionDetail.Password))
-            //{
-            //    var formsService = new FormsAuthenticationService();
-            //    formsService.SignIn(sessionDetail.UserName, false);
-
-            //    return Json(new { Success = true, User = sessionDetail.UserName });
-            //}
 
             return Json(new { Success = false });
         }

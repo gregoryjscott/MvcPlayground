@@ -12,8 +12,6 @@ namespace MvcTemplate.Areas.Security.Controllers
         {
             if (ModelState.IsValid)
             {
-                //var membershipService = new AccountMembershipService();
-                //MembershipCreateStatus createStatus = membershipService.CreateUser(model.UserName, model.Password, model.Email);
                 var createUser = TaskFactory<CreateUser>.Create();
                 createUser.UserDetail = userDetail;
                 createUser.Execute();
