@@ -175,14 +175,14 @@
             $.ajaxSetup({ cache: false });
 
             // Add a handler for anytime an ajax error occurs and see if its a 403 (that was thrown by an ajax controller action).
-            //                $("body").ajaxError(function (event, request, ajaxOptions, thrownError) {
-            //                    if (request.status == 403) {
-            //                        showLogin();
-            //                    }
-            //                    else {
-            //                        alert('An unexpected error occurred on the server.  StatusCode: ' + request.status + ', Error: ' + request.responseText);
-            //                    }
-            //                });
+//            $("body").ajaxError(function (event, request, ajaxOptions, thrownError) {
+//                if (request.status == 403) {
+//                    showLogin();
+//                }
+//                else {
+//                    alert('An unexpected error occurred on the server.  StatusCode: ' + request.status + ', Error: ' + request.responseText);
+//                }
+//            });
 
             // See if the user has been authenticated.
             var userIsAuthenticated = $("input[name*='userIsAuthenticated']").val();
@@ -204,10 +204,7 @@
         <div id="header">
             <h1 id="title">My MVC Application</h1>
 
-		    <div id="securityMenu" style="display:none" >
-			    <input type="radio" id="changePasswordMenuItem" name="securityMenu" /><label for="changePasswordMenuItem">Change Password</label>
-			    <input type="radio" id="logoffMenuItem" name="securityMenu" /><label id="logoffMenuItemLabel" for="logoffMenuItem">Logoff {user}</label>
-		    </div>
+            @Html.Partial("_SecurityMenu")
         </div>
 
         <div id="main">
