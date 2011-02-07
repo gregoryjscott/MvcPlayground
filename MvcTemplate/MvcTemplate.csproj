@@ -162,7 +162,7 @@
     <Folder Include="Areas\Security\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\_SignInDialog.cshtml" />
+    <Content Include="Views\Shared\_LoginDialog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Security\Views\Web.config" />

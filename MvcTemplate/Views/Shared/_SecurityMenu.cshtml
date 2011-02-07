@@ -1,6 +1,6 @@
 ﻿<script type="text/javascript">
     $(function () {
-        $('#logoffMenuItem').click(function () {
+        $('#logoutMenuItem').click(function () {
             $.post('/Security/Sessions/Delete', function () {
                 showLogin();
             });
@@ -10,5 +10,5 @@
 
 <div id="securityMenu">
 @*	<input type="radio" id="changePasswordMenuItem" name="securityMenu" /><label for="changePasswordMenuItem">Change Password</label>*@
-	<input type="radio" id="logoffMenuItem" name="securityMenu" /><label id="logoffMenuItemLabel" for="logoffMenuItem">Sign Off</label>
+	<input type="radio" id="logoutMenuItem" name="securityMenu" /><label for="logoutMenuItem">Logout</label>
 </div>

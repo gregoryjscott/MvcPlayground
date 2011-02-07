@@ -92,25 +92,21 @@
 
         <script type="text/javascript">
             function showLogin() {
-                $("#signInDialog").dialog({
+                $("#loginDialog").dialog({
                     modal: true,
                     draggable: false,
                     resizable: false,
                     width: '548px',
                     buttons: [
                         {
-                            text: "Sign In",
+                            text: "Login",
                             click: function () {
                                 var dialog = $(this);
-                                $("#signInForm").ajaxSubmit({
+                                $("#loginForm").ajaxSubmit({
                                     dataType: 'json',
-                                    beforeSubmit: function () {
-                                    },
                                     success: function (data) {
                                         if (data.Success) {
-                                            //alert("Success!");
                                             dialog.dialog('close');
-                                            showSecurityMenu(data.User);
                                         }
                                         else {
                                             alert("Fail!");
@@ -124,7 +120,7 @@
                         $(".ui-dialog-titlebar-close").hide();
                     },
                     open: function () {
-                        $('#signInForm').clearForm();
+                        $('#loginForm').clearForm();
                     }
                 })
             }
@@ -162,22 +158,18 @@
 //                });
 //            }
 
-            function showSecurityMenu() {
-                //$('#logoffMenuItemLabel').text('Logoff ' + user);
-            }
-
             $(function () {
                 $.ajaxSetup({ cache: false });
 
                 // Add a handler for anytime an ajax error occurs and see if its a 403 (that was thrown by an ajax controller action).
-                //            $("body").ajaxError(function (event, request, ajaxOptions, thrownError) {
-                //                if (request.status == 403) {
-                //                    showLogin();
-                //                }
-                //                else {
-                //                    alert('An unexpected error occurred on the server.  StatusCode: ' + request.status + ', Error: ' + request.responseText);
-                //                }
-                //            });
+                $("body").ajaxError(function (event, request, ajaxOptions, thrownError) {
+                    if (request.status == 403) {
+                        showLogin();
+                    }
+                    else {
+                        alert('An unexpected error occurred on the server.  StatusCode: ' + request.status + ', Error: ' + request.responseText);
+                    }
+                });
 
                 // See if the user has been authenticated.
                 var userIsAuthenticated = $("input[name*='userIsAuthenticated']").val();
@@ -186,11 +178,6 @@
                 }
 
                 $("#securityMenu").buttonset();
-
-                //                else {
-                //                    var authenticatedUser = $("input[name*='authenticatedUser']").val();
-                //                    showSecurityMenu(authenticatedUser);
-                //                }
             });
         </script>
     </head>
@@ -216,7 +203,7 @@
             @Html.Hidden("authenticatedUser", Context.User.Identity.Name)
         }
 
-        @Html.Partial("_SignInDialog")
+        @Html.Partial("_LoginDialog")
 
         @Html.Partial("_NewUserDialog")
     </body>
