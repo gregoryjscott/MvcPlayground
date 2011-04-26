@@ -4,6 +4,7 @@
             _.bindAll(this, 'showNewUser');
 
             this.loginView = new LoginView;
+            this.securityMenuView = new SecurityMenuView;
 
             $.ajaxSetup({ cache: false });
 
@@ -16,8 +17,6 @@
                     alert('An unexpected error occurred on the server.  StatusCode: ' + request.status + ', Error: ' + request.responseText);
                 }
             });
-
-            $("#securityMenu").buttonset();
 
             // See if the user has been authenticated.
             var userIsAuthenticated = $("input[name*='userIsAuthenticated']").val();
@@ -65,7 +64,6 @@
     });
 
     window.LoginView = Backbone.View.extend({
-
         initialize: function () {
             _.bindAll(this, 'render', 'attemptLogin', 'processLoginAttemptResponse');
 
@@ -108,6 +106,26 @@
             else {
                 alert("Fail!");
             }
+        }
+    });
+
+    window.SecurityMenuView = Backbone.View.extend({
+        el: $("#securityMenu"),
+
+        initialize: function () {
+            _.bindAll(this, 'logout');
+
+            $("#securityMenu").buttonset();
+        },
+
+        events: {
+            "click #logoutMenuItem": "logout"
+        },
+
+        logout: function () {
+            $.post('/Security/Sessions/Delete', function () {
+                window.ApplicationView.showLogin();
+            });
         }
     });
 
