@@ -2,7 +2,7 @@
     $(function () {
         $('#logoutMenuItem').click(function () {
             $.post('/Security/Sessions/Delete', function () {
-                showLogin();
+                window.ApplicationView.showLogin();
             });
         });
     });
