@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Security;
+using MvcTemplate.Areas.Security.Models;
 using MvcTemplate.Areas.Security.Models.Users;
 using MvcTemplate.Areas.Security.Tasks.Users;
 using MvcTemplate.Filters;
@@ -11,6 +12,7 @@ namespace MvcTemplate.Areas.Security.Controllers
     [HandleAjaxException]
     public class UsersController : Controller
     {
+        [HttpPost]
         public ActionResult Create(UserDetail userDetail)
         {
             if (ModelState.IsValid)
@@ -26,6 +28,12 @@ namespace MvcTemplate.Areas.Security.Controllers
             }
 
             return Json(new { Success = false });
+        }
+
+        [HttpPost]
+        public ActionResult Update(ChangePasswordModel changePasswordModel)
+        {
+            return Json(changePasswordModel);
         }
     }
 }

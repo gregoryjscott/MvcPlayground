@@ -1,10 +1,11 @@
 ﻿$(function () {
     window.ApplicationView = Backbone.View.extend({
         initialize: function () {
-            _.bindAll(this, 'showNewUser');
+            _.bindAll(this, 'showLogin', 'showMyAccount');
 
             this.loginView = new LoginView;
             this.securityMenuView = new SecurityMenuView;
+            this.myAccountView = new MyAccountView;
 
             $.ajaxSetup({ cache: false });
 
@@ -29,45 +30,18 @@
             this.loginView.render();
         },
 
-        showNewUser: function () {
-            $("#newUserDialog").dialog({
-                modal: true,
-                draggable: false,
-                resizable: false,
-                width: '548px',
-                buttons: [
-                                {
-                                    text: "Create User",
-                                    click: function () {
-                                        $("#newUserForm").ajaxSubmit({
-                                            dataType: 'json',
-                                            beforeSubmit: function () {
-                                            },
-                                            success: function (data) {
-                                                if (data.Success) {
-                                                    alert("Success!");
-                                                }
-                                                else {
-                                                    alert("Fail!");
-                                                }
-                                            }
-                                        })
-                                    }
-                                }
-                            ],
-                create: function (event, ui) {
-                    $(".ui-dialog-titlebar-close").hide();
-                    $("#newUserForm").clearForm();
-                }
-            });
+        showMyAccount: function () {
+            this.myAccountView.render();
         }
     });
 
     window.LoginView = Backbone.View.extend({
+        el: $("#loginDialog"),
+
         initialize: function () {
             _.bindAll(this, 'render', 'attemptLogin', 'processLoginAttemptResponse');
 
-            this.loginDialog = $("#loginDialog").dialog({
+            this.loginDialog = $(this.el).dialog({
                 autoOpen: false,
                 modal: true,
                 draggable: false,
@@ -115,17 +89,68 @@
         initialize: function () {
             _.bindAll(this, 'logout');
 
-            $("#securityMenu").buttonset();
+            $(this.el).buttonset();
         },
 
         events: {
+            "click #myAccountMenuItem": "myAccount",
             "click #logoutMenuItem": "logout"
+        },
+
+        myAccount: function () {
+            window.ApplicationView.showMyAccount();
         },
 
         logout: function () {
             $.post('/Security/Sessions/Delete', function () {
                 window.ApplicationView.showLogin();
             });
+        }
+    });
+
+    window.MyAccountView = Backbone.View.extend({
+        el: $("#myAccountDialog"),
+
+        initialize: function () {
+            _.bindAll(this, 'save', 'render', 'setupDialog');
+
+            this.myAccountDialog = $(this.el).dialog({
+                autoOpen: false,
+                modal: true,
+                draggable: false,
+                resizable: false,
+                width: '548px',
+                buttons: [
+                    {
+                        text: "Save",
+                        click: this.save
+                    }
+                ],
+                create: this.setupDialog
+            });
+        },
+
+        setupDialog: function (event, ui) {
+            $(".ui-dialog-titlebar-close").hide();
+            this.$("#myAccountForm").clearForm();
+        },
+
+        render: function () {
+            this.myAccountDialog.dialog("open");
+        },
+
+        save: function () {
+            this.$("#myAccountForm").ajaxSubmit({
+                dataType: 'json',
+                success: function () {
+                    if (data.Success) {
+                        alert("Success!");
+                    }
+                    else {
+                        alert("Fail!");
+                    }
+                }
+            })
         }
     });
 
