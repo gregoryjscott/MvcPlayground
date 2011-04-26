@@ -160,25 +160,30 @@
 //            }
 
             $(function () {
-                $.ajaxSetup({ cache: false });
+                window.ApplicationView = Backbone.View.extend({
+                    initialize: function () {
+//                        $.ajaxSetup({ cache: false });
 
-                // Add a handler for anytime an ajax error occurs and see if its a 403 (that was thrown by an ajax controller action).
-                $("body").ajaxError(function (event, request, ajaxOptions, thrownError) {
-                    if (request.status == 403) {
-                        showLogin();
-                    }
-                    else {
-                        alert('An unexpected error occurred on the server.  StatusCode: ' + request.status + ', Error: ' + request.responseText);
+//                        // Add a handler for anytime an ajax error occurs and see if its a 403 (that was thrown by an ajax controller action).
+//                        $("body").ajaxError(function (event, request, ajaxOptions, thrownError) {
+//                            if (request.status == 403) {
+//                                showLogin();
+//                            }
+//                            else {
+//                                alert('An unexpected error occurred on the server.  StatusCode: ' + request.status + ', Error: ' + request.responseText);
+//                            }
+//                        });
+
+//                        $("#securityMenu").buttonset();
+//                        // See if the user has been authenticated.
+//                        var userIsAuthenticated = $("input[name*='userIsAuthenticated']").val();
+//                        if (userIsAuthenticated != "True") {
+//                            showLogin();
+//                        }
                     }
                 });
 
-                // See if the user has been authenticated.
-                var userIsAuthenticated = $("input[name*='userIsAuthenticated']").val();
-                if (userIsAuthenticated != "True") {
-                    showLogin();
-                }
-
-                $("#securityMenu").buttonset();
+                window.applicationView = new ApplicationView;
             });
         </script>
     </head>
