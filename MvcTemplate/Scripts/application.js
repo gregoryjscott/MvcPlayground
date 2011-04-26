@@ -1,12 +1,15 @@
 ﻿$(function () {
     window.ApplicationView = Backbone.View.extend({
         initialize: function () {
+            _.bindAll(this, 'showNewUser');
+
+            this.loginView = new LoginView;
+
             $.ajaxSetup({ cache: false });
 
             // Add a handler for anytime an ajax error occurs and see if its a 403 (that was thrown by an ajax controller action).
             $("body").ajaxError(function (event, request, ajaxOptions, thrownError) {
                 if (request.status == 403) {
-                    // todo - not sure if "this." is going to work here
                     this.showLogin();
                 }
                 else {
@@ -24,37 +27,7 @@
         },
 
         showLogin: function () {
-            $("#loginDialog").dialog({
-                modal: true,
-                draggable: false,
-                resizable: false,
-                width: '548px',
-                buttons: [
-                                {
-                                    text: "Login",
-                                    click: function () {
-                                        var dialog = $(this);
-                                        $("#loginForm").ajaxSubmit({
-                                            dataType: 'json',
-                                            success: function (data) {
-                                                if (data.Success) {
-                                                    dialog.dialog('close');
-                                                }
-                                                else {
-                                                    alert("Fail!");
-                                                }
-                                            }
-                                        })
-                                    }
-                                }
-                            ],
-                create: function () {
-                    $(".ui-dialog-titlebar-close").hide();
-                },
-                open: function () {
-                    $('#loginForm').clearForm();
-                }
-            })
+            this.loginView.render();
         },
 
         showNewUser: function () {
@@ -88,6 +61,53 @@
                     $("#newUserForm").clearForm();
                 }
             });
+        }
+    });
+
+    window.LoginView = Backbone.View.extend({
+
+        initialize: function () {
+            _.bindAll(this, 'render', 'attemptLogin', 'processLoginAttemptResponse');
+
+            this.loginDialog = $("#loginDialog").dialog({
+                autoOpen: false,
+                modal: true,
+                draggable: false,
+                resizable: false,
+                width: '548px',
+                buttons: [
+                    {
+                        text: "Login",
+                        click: this.attemptLogin
+                    }
+                ],
+                create: function () {
+                    $(".ui-dialog-titlebar-close").hide();
+                },
+                open: function () {
+                    $('#loginForm').clearForm();
+                }
+            });
+        },
+
+        render: function () {
+            this.loginDialog.dialog("open");
+        },
+
+        attemptLogin: function () {
+            $("#loginForm").ajaxSubmit({
+                dataType: 'json',
+                success: this.processLoginAttemptResponse
+            })
+        },
+
+        processLoginAttemptResponse: function (data) {
+            if (data.Success) {
+                this.loginDialog.dialog('close');
+            }
+            else {
+                alert("Fail!");
+            }
         }
     });
 
