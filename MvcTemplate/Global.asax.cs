@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using MvcTemplate.Areas.Security.Controllers;
+using RestMvc;
 
 namespace MvcTemplate
 {
@@ -31,6 +33,8 @@ namespace MvcTemplate
 
         protected void Application_Start()
         {
+            RouteTable.Routes.Map<AccountUpdatesController>();
+
             AreaRegistration.RegisterAllAreas();
 
             RegisterGlobalFilters(GlobalFilters.Filters);

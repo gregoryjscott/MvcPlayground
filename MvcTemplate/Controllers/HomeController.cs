@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using RestMvc.Attributes;
 
 namespace MvcTemplate.Controllers
 {
     public class HomeController : Controller
     {
+//        [Get("/")]
         public ActionResult Index()
         {
             ViewBag.Message = "Welcome to ASP.NET MVC!";

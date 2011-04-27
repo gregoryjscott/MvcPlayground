@@ -80,6 +80,11 @@
             else {
                 alert("Fail!");
             }
+        },
+
+        // TODO - move this function to ApplicationView?
+        createMyAccount: function (userName) {
+            window.ApplicationView.myAccount = new MyAccount({id : userName});
         }
     });
 
@@ -105,6 +110,23 @@
             $.post('/Security/Sessions/Delete', function () {
                 window.ApplicationView.showLogin();
             });
+        }
+    });
+
+    window.MyAccount = Backbone.Model.extend({
+        // We will only be calling creating AccountUpdates.
+        url: function () {
+            return '/Security/AccountUpdates';
+        },
+
+        initialize: function () {
+            _.bindAll(this, 'validate', 'somethingElse');
+        },
+
+        validate: function (attributes) {
+        },
+
+        somethingElse: function (attributes) {
         }
     });
 
@@ -140,17 +162,28 @@
         },
 
         save: function () {
-            this.$("#myAccountForm").ajaxSubmit({
-                dataType: 'json',
-                success: function () {
-                    if (data.Success) {
-                        alert("Success!");
-                    }
-                    else {
-                        alert("Fail!");
-                    }
-                }
-            })
+            var oldPassword = this.$('#OldPassword').val();
+            var newPassword = this.$('#NewPassword').val();
+            var confirmPassword = this.$('#ConfirmPassword').val();
+            var myAccount = new MyAccount({ 
+                OldPassword : oldPassword,
+                NewPassword : newPassword,
+                ConfirmPassword : confirmPassword
+            });
+
+            myAccount.save();
+
+//            this.$("#myAccountForm").ajaxSubmit({
+//                dataType: 'json',
+//                success: function () {
+//                    if (data.Success) {
+//                        alert("Success!");
+//                    }
+//                    else {
+//                        alert("Fail!");
+//                    }
+//                }
+//            })
         }
     });
 

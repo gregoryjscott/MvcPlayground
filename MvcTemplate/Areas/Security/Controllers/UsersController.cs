@@ -12,23 +12,23 @@ namespace MvcTemplate.Areas.Security.Controllers
     [HandleAjaxException]
     public class UsersController : Controller
     {
-        [HttpPost]
-        public ActionResult Create(UserDetail userDetail)
-        {
-            if (ModelState.IsValid)
-            {
-                var createUser = TaskFactory<CreateUser>.Create();
-                createUser.UserDetail = userDetail;
-                createUser.Execute();
+        //[HttpPost]
+        //public ActionResult Create(UserDetail userDetail)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var createUser = TaskFactory<CreateUser>.Create();
+        //        createUser.UserDetail = userDetail;
+        //        createUser.Execute();
 
-                if (createUser.MembershipCreateStatus == MembershipCreateStatus.Success)
-                {
-                    return Json(new { Success = true });
-                }
-            }
+        //        if (createUser.MembershipCreateStatus == MembershipCreateStatus.Success)
+        //        {
+        //            return Json(new { Success = true });
+        //        }
+        //    }
 
-            return Json(new { Success = false });
-        }
+        //    return Json(new { Success = false });
+        //}
 
         [HttpPost]
         public ActionResult Update(ChangePasswordModel changePasswordModel)

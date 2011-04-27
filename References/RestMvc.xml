@@ -1,0 +1,352 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RestMvc</name>
+    </assembly>
+    <members>
+        <member name="T:RestMvc.Attributes.DeleteAttribute">
+            <summary>
+            Route the DELETE method to the provided URIs.
+            </summary>
+        </member>
+        <member name="T:RestMvc.Attributes.ResourceActionAttribute">
+            <summary>
+            Superclass for all routing attributes.
+            </summary>
+        </member>
+        <member name="M:RestMvc.Attributes.ResourceActionAttribute.Create(System.String,System.String)">
+            <summary>
+            A factory method for dynamically creating the appropriate subclass
+            </summary>
+        </member>
+        <member name="M:RestMvc.Attributes.ResourceActionAttribute.SupportsUri(System.String)">
+            <summary>
+            Returns true if this attribute's ResourceUris contains the provided uri; false otherwise
+            </summary>
+        </member>
+        <member name="M:RestMvc.Attributes.ResourceActionAttribute.Contains(RestMvc.Attributes.ResourceActionAttribute)">
+            <summary>
+            Returns true if the HttpMethod of other matches this HttpMethod, and if this attribute's
+            ResourceUris is a superset of other's ResourceUris
+            </summary>
+        </member>
+        <member name="P:RestMvc.Attributes.ResourceActionAttribute.ResourceUris">
+            <summary>
+            The set of URI templates that map to the method annotated with this attribute
+            </summary>
+        </member>
+        <member name="P:RestMvc.Attributes.ResourceActionAttribute.HttpMethod">
+            <summary>
+            The HTTP method required to route to the method annotated with this attribute
+            </summary>
+        </member>
+        <member name="T:RestMvc.Attributes.GetAttribute">
+            <summary>
+            Route the GET method to the provided URIs.
+            </summary>
+        </member>
+        <member name="T:RestMvc.Attributes.PostAttribute">
+            <summary>
+            Route the POST method to the provided URIs.
+            </summary>
+        </member>
+        <member name="T:RestMvc.Attributes.PutAttribute">
+            <summary>
+            Route the PUT method to the provided URIs.
+            </summary>
+        </member>
+        <member name="T:RestMvc.Conneg.ConnegPriorityGivenTo">
+            <summary>
+            When the server can provide multiple media types that the client
+            accepts, this enum decides whether we give priority to the client
+            Accept type ordering, or the server ordering in MediaTypeFormatMap.
+            According to the spec, the client takes priority, but I added server
+            priority as a way to work around what I consider to be a bug in
+            Google Chrome - despite its inability to natively render XML,
+            Chrome claims to prefer XML over HTML in the Accept header.
+            </summary>
+        </member>
+        <member name="F:RestMvc.Conneg.ConnegPriorityGivenTo.Client">
+            <summary>
+            The client ordering of media types in the Accept header takes priority
+            </summary>
+        </member>
+        <member name="F:RestMvc.Conneg.ConnegPriorityGivenTo.Server">
+            <summary>
+            The server ordering of media types in the MediaTypeFormatMap takes priority
+            </summary>
+        </member>
+        <member name="T:RestMvc.Conneg.MediaType">
+            <summary>
+            Represents a MIME media type
+            </summary>
+        </member>
+        <member name="M:RestMvc.Conneg.MediaType.Matches(System.String)">
+            <summary>
+            Returns true if the given mediaType matches this media type.
+            Wildcard matches are allowed - in other words, if this
+            media type is text/html, then any of text/html, text/*,
+            or */* will match.
+            </summary>
+        </member>
+        <member name="P:RestMvc.Conneg.MediaType.ContentType">
+            <summary>
+            The grouping for the type (e.g. text in text/html)
+            </summary>
+        </member>
+        <member name="P:RestMvc.Conneg.MediaType.SubType">
+            <summary>
+            The sub type (e.g. html in text/html)
+            </summary>
+        </member>
+        <member name="T:RestMvc.Conneg.MediaTypeFormatMap">
+            <summary>
+            Represents the mapping between a media type and the internal format key used by the controller actions.
+            A simple dictionary doesn't work because there's an ordering - we prioritize if multiple
+            media types are accepted.
+            </summary>
+        </member>
+        <member name="M:RestMvc.Conneg.MediaTypeFormatMap.Add(System.String,System.String)">
+            <summary>
+            Maps the provided media type to the given format.
+            </summary>
+        </member>
+        <member name="M:RestMvc.Conneg.MediaTypeFormatMap.SupportsMediaType(System.String)">
+            <summary>
+            Returns true if this map contains an entry for mediaType, including
+            a wildcard match (e.g. text/*, */*)
+            </summary>
+        </member>
+        <member name="M:RestMvc.Conneg.MediaTypeFormatMap.FormatFor(System.String[])">
+            <summary>
+            Returns the format for the first entry in this map that matches any of the 
+            media types in the given array.  Wildcard matches (e.g. text/*, */*) are acceptable.
+            Since entries in this map take precedence over entries in the given array, this provides
+            a way for the server to set priority over the client, if desired.
+            </summary>
+        </member>
+        <member name="P:RestMvc.Conneg.MediaTypeFormatMap.DefaultFormat">
+            <summary>
+            Returns the default format (first added)
+            </summary>
+        </member>
+        <member name="T:RestMvc.Conneg.ContentNegotiationRouteProxy">
+            <summary>
+            Acts as a decorator to the standard RouteHandler, and adds content
+            negotiation based on the prioritized associations that the application declares
+            in the MediaTypeFormatMap passed in.
+            </summary>
+        </member>
+        <member name="M:RestMvc.Conneg.ContentNegotiationRouteProxy.#ctor(System.Web.Routing.IRouteHandler,RestMvc.Conneg.MediaTypeFormatMap,RestMvc.Conneg.ConnegPriorityGivenTo)">
+            <summary>
+            Creates a new ContentNegotiationRouteProxy.
+            </summary>
+            <param name="proxiedHandler">The handler to proxy, typically an MvcRouteHandler</param>
+            <param name="map">The map containing the associations between media types and formats</param>
+            <param name="priority">Whether the client sets the priority or the server.  The HTTP spec
+            indicates that the client should set it, but on occasion the server may need to set it
+            to work around bugs in browsers (e.g. Chrome prioritizes xml over html).</param>
+        </member>
+        <member name="M:RestMvc.Conneg.ContentNegotiationRouteProxy.AddFormat(System.Web.Routing.RouteData,System.String[])">
+            <summary>
+            If the routing system hasn't already added a format to the route,
+            add a format based on the first Accept header match in our map.
+            </summary>
+            <param name="route"></param>
+            <param name="acceptTypes"></param>
+        </member>
+        <member name="T:RestMvc.HttpContextWithReadableOutputStream">
+            <summary>
+            To handle HEAD requests, we need to capture the output of a GET
+            without sending the result to the user.  The only way I could think
+            of handling that was by proxying the HttpContext, and replacing
+            the Response.Output.
+            </summary>
+        </member>
+        <member name="T:RestMvc.PostDataConstraint">
+            <summary>
+            A routing constraint that verifies one of the form elements
+            in an HTTP post matches a given value.
+            </summary>
+        </member>
+        <member name="M:RestMvc.PostDataConstraint.#ctor(System.String,System.String)">
+            <summary>
+            Creates a new PostDataConstraint
+            </summary>
+            <param name="postDataKey">The key to look for in Request.Form</param>
+            <param name="postDataValue">The value that must match in Request.Form[postDataKey]</param>
+        </member>
+        <member name="M:RestMvc.ReflectionExtensions.GetControllerName(System.Type)">
+            <summary>
+            Returns the name of the controller with the suffix stripped out
+            </summary>
+        </member>
+        <member name="M:RestMvc.ReflectionExtensions.GetResourceActions(System.Type)">
+            <summary>
+            Get all methods associated with a ResourceActionAttribute.
+            </summary>
+        </member>
+        <member name="M:RestMvc.ReflectionExtensions.GetResourceActionAttribute(System.Reflection.MethodInfo)">
+            <summary>
+            Gets the first ResourceActionAttribute associated with the given method.
+            </summary>
+        </member>
+        <member name="M:RestMvc.ReflectionExtensions.GetResourceUris(System.Type)">
+            <summary>
+            The distinct set of URI templates supported by ResourceActionAttributes on the type
+            </summary>
+        </member>
+        <member name="M:RestMvc.ReflectionExtensions.GetSupportedMethods(System.Type,System.String)">
+            <summary>
+            The set of HTTP methods supported at resourceUri as specified in ResourceActionAttributes
+            </summary>
+        </member>
+        <member name="M:RestMvc.ReflectionExtensions.GetUnsupportedMethods(System.Type,System.String)">
+            <summary>
+            The set of HTTP methods _not_ supported at resourceUri as specified in ResourceActionAttributes
+            </summary>
+        </member>
+        <member name="M:RestMvc.ReflectionExtensions.GetAction(System.Type,System.String,System.String)">
+            <summary>
+            The MethodInfo associated with the given HTTP method and resource URI,
+            as annotated by a ResourceActionAttribute, or null if no match is found.
+            </summary>
+        </member>
+        <member name="T:RestMvc.ResourceMapper`1">
+            <summary>
+            Reflects on the attributes in TController to discover the routes
+            to be added.  Each TController can support multiple resource types.
+            This is quite common - typically an Index (list) and Show (entity)
+            are supported by the same controller, as are edit and create forms,
+            all of which have different resource types defined by different
+            URI templates.
+            </summary>
+            <typeparam name="TController">The type of controller to add routes for</typeparam>
+        </member>
+        <member name="M:RestMvc.ResourceMapper`1.MapSupportedMethods">
+            <summary>
+            Maps all the routes provided by ResourceActionAttribute annotations.
+            For GET requests, also maps an additional "formatted" route.
+            e.g. [Get "test/{id}"] also maps test/{id}.{format}, which allows
+            the resource to serve up multiple representations without relying
+            on HTTP header content negotiation.
+            </summary>
+        </member>
+        <member name="M:RestMvc.ResourceMapper`1.MapUnsupportedMethods">
+            <summary>
+            For every resource URI referenced in a ResourceActionAttribute,
+            maps the HTTP methods _not_ supported at that URI to a method
+            on the RestfulController that returns a 405 HTTP code.
+            This does not include the HEAD, OPTIONS, or WebDAV methods.
+            </summary>
+        </member>
+        <member name="M:RestMvc.ResourceMapper`1.MapHead">
+            <summary>
+            For every resource URI referenced in a ResourceActionAttribute,
+            maps the HEAD method to a RestfulController action that knows
+            how to respond appropriately.
+            For controllers that don't subclass RestfulController, this
+            method will do nothing.
+            </summary>
+        </member>
+        <member name="M:RestMvc.ResourceMapper`1.MapOptions">
+            <summary>
+            For every resource URI referenced in a ResourceActionAttribute,
+            maps the OPTIONS method to a RestfulController action that knows
+            how to respond appropriately.  If your controller subclasses
+            RestfulController, you can hook into the Options handling by
+            overriding the Options method.
+            </summary>
+        </member>
+        <member name="M:RestMvc.ResourceMapper`1.MapTunnelledMethods(System.String)">
+            <summary>
+            Maps all the routes provided by PutAttribute and DeleteAttribute annotations
+            tunnelled through a POST routes, as long as the post data contains
+            a key matching postDataKey, and a value of either PUT or DELETE.
+            This is needed for browser support.
+            </summary>
+        </member>
+        <member name="T:RestMvc.ResponseWithReadableOutputStream">
+            <summary>
+            Acts as a proxy to the real HttpResponse during HEAD requests.
+            Used only to capture the output stream without actually sending
+            it to the client.
+            </summary>
+        </member>
+        <member name="P:RestMvc.ResponseWithReadableOutputStream.OutputText">
+            <summary>
+            Returns the contents of the output stream converted to a string
+            </summary>
+        </member>
+        <member name="T:RestMvc.RestfulController">
+            <summary>
+            Provides support for automatically handling OPTIONS and HEAD requests.
+            You can use RestMvc without subclassing RestfulController.  The only
+            reason you might want to subclass is because it gives you an opportunity
+            to override the handling of HEAD and OPTIONS requests.
+            </summary>
+        </member>
+        <member name="M:RestMvc.RestfulController.Options(System.String)">
+            <summary>
+            The action called on any HTTP OPTIONS request.
+            </summary>
+            <param name="resourceUri">The URI template</param>
+            <returns>An empty result, with the Allow header set.  Override in a subclass
+            and call SetAllowHeader to return content.</returns>
+        </member>
+        <member name="M:RestMvc.RestfulController.Head(System.String)">
+            <summary>
+            The action called on any HTTP HEAD request.
+            </summary>
+            <param name="resourceUri">The URI template</param>
+        </member>
+        <member name="M:RestMvc.RestfulController.MethodNotSupported(System.String)">
+            <summary>
+            The method called when an HTTP method was called for a resource
+            that does not support that method.
+            </summary>
+            <param name="resourceUri">The URI template</param>
+        </member>
+        <member name="M:RestMvc.RestfulController.SetAllowHeader(System.String)">
+            <summary>
+            Sets the Allow header to all supported methods for the resourceUri.
+            </summary>
+            <param name="resourceUri">The URI template</param>
+        </member>
+        <member name="M:RestMvc.RouteCollectionExtensions.MapAssembly(System.Web.Routing.RouteCollection,System.Reflection.Assembly)">
+            <summary>
+            Maps all routes on all non-abstract Controller subclasses in the given assembly
+            annotated with a ResourceActionAttribute.  For each distinct URI template,
+            OPTIONS and HEAD will automatically be handled, and unsupported methods
+            for the given URI will be routed to an action that returns a 405 status code.
+            </summary>
+        </member>
+        <member name="M:RestMvc.RouteCollectionExtensions.MapAssembly(System.Web.Routing.RouteCollection,System.Reflection.Assembly,System.Web.Routing.IRouteHandler)">
+            <summary>
+            Maps all routes on all non-abstract Controller subclasses in the given assembly
+            annotated with a ResourceActionAttribute.  For each distinct URI template,
+            OPTIONS and HEAD will automatically be handled, and unsupported methods
+            for the given URI will be routed to an action that returns a 405 status code.
+            The provided routeHandler will be used for all routes.
+            </summary>
+        </member>
+        <member name="M:RestMvc.RouteCollectionExtensions.Map``1(System.Web.Routing.RouteCollection)">
+            <summary>
+            Maps all routes on TController annotated with a ResourceActionAttribute.
+            OPTIONS and HEAD methods for each URI will be routed to a method on
+            RestfulController that knows how to respond appropriately.
+            For each URI provided, unsupported methods will be routed to a RestfulController
+            method that returns a 405 status code.
+            </summary>
+        </member>
+        <member name="M:RestMvc.RouteCollectionExtensions.Map``1(System.Web.Routing.RouteCollection,System.Web.Routing.IRouteHandler)">
+            <summary>
+            Maps all routes on TController annotated with a ResourceActionAttribute.
+            OPTIONS and HEAD methods for each URI will be routed to a method on
+            RestfulController that knows how to respond appropriately.
+            For each URI provided, unsupported methods will be routed to a RestfulController
+            method that returns a 405 status code.  The provided routeHandler will be used.
+            </summary>
+        </member>
+    </members>
+</doc>

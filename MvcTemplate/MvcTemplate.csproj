@@ -35,6 +35,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="RestMvc">
+      <HintPath>..\References\RestMvc.dll</HintPath>
+    </Reference>
     <Reference Include="Simpler">
       <HintPath>..\References\Simpler.dll</HintPath>
     </Reference>
@@ -61,9 +64,11 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\Security\Controllers\AccountUpdatesController.cs" />
     <Compile Include="Areas\Security\Controllers\UsersController.cs" />
     <Compile Include="Areas\Security\Controllers\SessionsController.cs" />
     <Compile Include="Areas\Security\Models\AccountMembershipService.cs" />
+    <Compile Include="Areas\Security\Models\AccountUpdates\AccountUpdate.cs" />
     <Compile Include="Areas\Security\Models\AccountValidation.cs" />
     <Compile Include="Areas\Security\Models\FormsAuthenticationService.cs" />
     <Compile Include="Areas\Security\Models\Sessions\SessionDetail.cs" />
