@@ -44,16 +44,13 @@
             $(this.el).empty();
             $("#moduleTemplate").tmpl().appendTo(this.el);
 
-            // Name and cache the screen template.
-            //$.template("screenTemplate", $("#screenTemplate").text());
-            $.template("screenTemplate", "<h3><a href='#'>${ $data.id }</a></h3><div><p>${ $data.content }</p></div>");
-
             // Setup the module data apply bindings.
             var moduleModel = {
-                screens: '[{ id: "Infielders", content: "second base, shortstop" }]'
+                // TODO - this didn't work: '[{ id: "Infielders", content: "second base, shortstop" }]'
+                screens: ko.observableArray()
             };
-            //moduleModel.screens.push({ id: "Infielders", content: "second base, shortstop" });
-            //moduleModel.screens.push({ id: "Outfielders", content: "left, center, right" });
+            moduleModel.screens.push({ id: "Infielders", content: "second base, shortstop" });
+            moduleModel.screens.push({ id: "Outfielders", content: "left, center, right" });
             ko.applyBindings(moduleModel);
 
             this.$("#accordion").accordion();
