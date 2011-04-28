@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using MvcTemplate.Areas.Security.Models;
 using MvcTemplate.Areas.Security.Models.AccountUpdates;
 using RestMvc.Attributes;
 
@@ -9,7 +10,18 @@ namespace MvcTemplate.Areas.Security.Controllers
         [Post("/Security/AccountUpdates")]
         public ActionResult Create(AccountUpdate accountUpdate)
         {
-            // TODO - persist it
+            if (ModelState.IsValid)
+            {
+                var membershipService = new AccountMembershipService();
+                if (membershipService.ChangePassword(User.Identity.Name, accountUpdate.OldPassword, accountUpdate.NewPassword))
+                {
+                    return Json(new { Success = true });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
+                }
+            }
 
             return Json(accountUpdate);
         }

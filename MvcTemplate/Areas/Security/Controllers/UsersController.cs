@@ -30,10 +30,10 @@ namespace MvcTemplate.Areas.Security.Controllers
         //    return Json(new { Success = false });
         //}
 
-        [HttpPost]
-        public ActionResult Update(ChangePasswordModel changePasswordModel)
-        {
-            return Json(changePasswordModel);
-        }
+        //[HttpPost]
+        //public ActionResult Update(ChangePasswordModel changePasswordModel)
+        //{
+        //    return Json(changePasswordModel);
+        //}
     }
 }
