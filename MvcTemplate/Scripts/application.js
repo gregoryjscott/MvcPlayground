@@ -1,5 +1,7 @@
 ﻿$(function () {
     window.ApplicationView = Backbone.View.extend({
+        el: $("#main"),
+
         initialize: function () {
             _.bindAll(this, 'showLogin', 'showMyAccount');
 
@@ -24,6 +26,9 @@
             if (userIsAuthenticated != "True") {
                 this.showLogin();
             }
+            else {
+                this.showContent();
+            }
         },
 
         showLogin: function () {
@@ -35,6 +40,9 @@
         },
 
         showContent: function () {
+            $(this.el).empty();
+            $("#dummyContent").tmpl().appendTo(this.el);
+            this.$("#accordion").accordion();
         }
     });
 
@@ -89,7 +97,7 @@
 
         // TODO - move this function to ApplicationView?
         createMyAccount: function (userName) {
-            window.ApplicationView.myAccount = new MyAccount({id : userName});
+            window.ApplicationView.myAccount = new MyAccount({ id: userName });
         }
     });
 
@@ -170,25 +178,25 @@
             var oldPassword = this.$('#OldPassword').val();
             var newPassword = this.$('#NewPassword').val();
             var confirmPassword = this.$('#ConfirmPassword').val();
-            var myAccount = new MyAccount({ 
-                OldPassword : oldPassword,
-                NewPassword : newPassword,
-                ConfirmPassword : confirmPassword
+            var myAccount = new MyAccount({
+                OldPassword: oldPassword,
+                NewPassword: newPassword,
+                ConfirmPassword: confirmPassword
             });
 
             myAccount.save();
 
-//            this.$("#myAccountForm").ajaxSubmit({
-//                dataType: 'json',
-//                success: function () {
-//                    if (data.Success) {
-//                        alert("Success!");
-//                    }
-//                    else {
-//                        alert("Fail!");
-//                    }
-//                }
-//            })
+            //            this.$("#myAccountForm").ajaxSubmit({
+            //                dataType: 'json',
+            //                success: function () {
+            //                    if (data.Success) {
+            //                        alert("Success!");
+            //                    }
+            //                    else {
+            //                        alert("Fail!");
+            //                    }
+            //                }
+            //            })
         }
     });
 
