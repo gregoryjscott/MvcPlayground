@@ -32,6 +32,9 @@
 
         showMyAccount: function () {
             this.myAccountView.render();
+        },
+
+        showContent: function () {
         }
     });
 
@@ -76,6 +79,8 @@
         processLoginAttemptResponse: function (data) {
             if (data.Success) {
                 this.loginDialog.dialog('close');
+
+                window.ApplicationView.showContent();
             }
             else {
                 alert("Fail!");

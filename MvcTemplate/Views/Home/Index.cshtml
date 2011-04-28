@@ -3,14 +3,15 @@
     <head>
         <title>MVC Template</title>
 
-        <!-- CSS -->
+        <!-- css -->
         <link href="@Url.Content("~/Content/themes/aristo/jquery-ui.css")" rel="stylesheet" type="text/css" />
         <link href="@Url.Content("~/Content/blueprint/grid.css")" rel="stylesheet" type="text/css" media="screen, projection" />
 
-        <!-- JS -->
+        <!-- js -->
         <script src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")" type="text/javascript"></script>
         <script src="@Url.Content("~/Scripts/jquery-ui.min.js")" type="text/javascript"></script>
         <script src="@Url.Content("~/Scripts/jquery.form.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.tmpl.js")" type="text/javascript"></script>
         <script src="@Url.Content("~/Scripts/underscore.js")" type="text/javascript"></script>
         <script src="@Url.Content("~/Scripts/backbone.js")" type="text/javascript"></script>
         <script src="@Url.Content("~/Scripts/knockout-1.2.0.js")" type="text/javascript"></script>
@@ -94,6 +95,62 @@
             }
        
         </style>
+
+        <!-- templates -->
+        <script id='personTemplate' type='text/html'>
+            ${ name } is ${ age } years old
+            <button data-bind='click: makeOlder'>Make older</button>
+        </script>
+        <script id='dummyContent' type='text/html'>
+            <div id="accordion">
+	            <h3><a href="#">Section 1</a></h3>
+	            <div>
+		            <p>
+		            Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+		            ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+		            amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+		            odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+		            </p>
+	            </div>
+	            <h3><a href="#">Section 2</a></h3>
+	            <div>
+		            <p>
+		            Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+		            purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+		            velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+		            suscipit faucibus urna.
+		            </p>
+	            </div>
+	            <h3><a href="#">Section 3</a></h3>
+	            <div>
+		            <p>
+		            Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+		            Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
+		            ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
+		            lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
+		            </p>
+		            <ul>
+			            <li>List item one</li>
+			            <li>List item two</li>
+			            <li>List item three</li>
+		            </ul>
+	            </div>
+	            <h3><a href="#">Section 4</a></h3>
+	            <div>
+		            <p>
+		            Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+		            et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+		            faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+		            mauris vel est.
+		            </p>
+		            <p>
+		            Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+		            Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+		            inceptos himenaeos.
+		            </p>
+	            </div>
+            </div>
+        </script>
     </head>
 
     <body>
@@ -110,6 +167,7 @@
             </p>
         </div>
 
+        <!-- TODO - should probably rename this to userIsAlreadyAuthenticated. -->
         @Html.Hidden("userIsAuthenticated", Request.IsAuthenticated)
 
         @if (Request.IsAuthenticated)

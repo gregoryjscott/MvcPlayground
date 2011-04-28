@@ -120,6 +120,7 @@
     <Content Include="Scripts\backbone-min.js" />
     <Content Include="Scripts\backbone.js" />
     <Content Include="Scripts\jquery.form.js" />
+    <Content Include="Scripts\jquery.tmpl.js" />
     <Content Include="Scripts\knockout-1.2.0.debug.js" />
     <Content Include="Scripts\knockout-1.2.0.js" />
     <Content Include="Scripts\knockout.mapping.js" />
