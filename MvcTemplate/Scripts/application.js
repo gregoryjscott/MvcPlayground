@@ -40,8 +40,19 @@
         },
 
         showContent: function () {
+            // Add the module template to the DOM.
             $(this.el).empty();
-            $("#dummyContent").tmpl().appendTo(this.el);
+            $("#moduleTemplate").tmpl().appendTo(this.el);
+
+            // Setup the module data apply bindings.
+            var moduleModel = {
+                screens: ko.observableArray()
+            };
+            moduleModel.screens.push({ id: "Infielders", content: "second base, shortstop" });
+            moduleModel.screens.push({ id: "Outfielders", content: "left, center, right" });
+            ko.applyBindings(moduleModel);
+
+
             this.$("#accordion").accordion();
         }
     });
