@@ -90,6 +90,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\application.css" />
     <Content Include="Content\blueprint\grid.css" />
     <Content Include="Content\themes\aristo\images\button_bg.png" />
     <Content Include="Content\themes\aristo\images\datepicker.gif" />

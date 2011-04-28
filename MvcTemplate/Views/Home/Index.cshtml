@@ -5,7 +5,12 @@
 
         <!-- css -->
         <link href="@Url.Content("~/Content/themes/aristo/jquery-ui.css")" rel="stylesheet" type="text/css" />
-        <link href="@Url.Content("~/Content/blueprint/grid.css")" rel="stylesheet" type="text/css" media="screen, projection" />
+        <link href="@Url.Content("~/Content/blueprint/grid.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/application.css")" rel="stylesheet" type="text/css" />
+
+        <!-- templates -->
+        <script id="personTemplate" type="text/html">@Html.Partial("_PersonTemplate")</script>
+        <script id="dummyContent" type="text/html">@Html.Partial("_DummyContentTemplate")</script>
 
         <!-- referenced js -->
         <script src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")" type="text/javascript"></script>
@@ -16,88 +21,6 @@
         <script src="@Url.Content("~/Scripts/backbone.js")" type="text/javascript"></script>
         <script src="@Url.Content("~/Scripts/knockout-1.2.0.js")" type="text/javascript"></script>
         <script src="@Url.Content("~/Scripts/knockout.mapping.js")" type="text/javascript"></script>
-
-        <!-- templates -->
-        <script id="personTemplate" type="text/html">@Html.Partial("_PersonTemplate")</script>
-        <script id="dummyContent" type="text/html">@Html.Partial("_DummyContentTemplate")</script>
-
-        <style type="text/css">
-            header
-            {
-                height: 50px;
-            }
-        
-            #logo 
-            {
-                margin: 0;
-                display:block;
-                float: left;
-            }            
-        
-            #securityMenu 
-            {
-                float: right;
-            }     
-        
-            /* Styles for validation helpers
-            -----------------------------------------------------------*/
-            .field-validation-error
-            {
-                color: #ff0000;
-            }
-
-            .field-validation-valid
-            {
-                display: none;
-            }
-
-            .input-validation-error
-            {
-                border: 1px solid #ff0000;
-                background-color: #ffeeee;
-            }
-
-            .validation-summary-errors
-            {
-                font-weight: bold;
-                color: #ff0000;
-            }
-
-            .validation-summary-valid
-            {
-                display: none;
-            }
-
-            /* Styles for editor and display helpers
-            ----------------------------------------------------------*/
-            .display-label,
-            .editor-label
-            {
-                margin: 1em 0 0 0;
-            }
-
-            .display-field,
-            .editor-field
-            {
-                margin:0.5em 0 0 0;
-            }
-
-            .text-box
-            {
-                width: 30em;
-            }
-
-            .text-box.multi-line
-            {
-                height: 6.5em;
-            }
-
-            .tri-state
-            {
-                width: 6em;
-            }
-       
-        </style>
 
         <!-- execute the application -->
         <script src="@Url.Content("~/Scripts/application.js")" type="text/javascript"></script>
