@@ -215,5 +215,21 @@
         }
     });
 
+    window.Area = Backbone.Model.extend({
+        initialize: function () {
+            _.bindAll(this, 'validate', 'somethingElse');
+        },
+
+        validate: function (attributes) {
+        },
+
+        somethingElse: function (attributes) {
+        }
+    });
+
+    window.Areas = Backbone.Collection.extend({
+        url: '/Areas'
+    });
+
     window.ApplicationView = new ApplicationView;
 });
