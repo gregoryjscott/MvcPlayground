@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace MvcPlayground.Areas.BaseballTeams
+namespace MvcPlayground.Areas.Baseball
 {
     public class BaseballTeamsAreaRegistration : AreaRegistration
     {

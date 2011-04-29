@@ -1,4 +1,4 @@
-﻿namespace MvcPlayground.Areas.BaseballTeams.Models
+﻿namespace MvcPlayground.Areas.Baseball.Models
 {
     public class Manager
     {

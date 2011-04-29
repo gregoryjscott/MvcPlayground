@@ -1,18 +1,16 @@
 ﻿using System.Web.Mvc;
-using MvcPlayground.Areas.BaseballTeams.Models;
 using MvcPlayground.Models;
 using RestMvc.Attributes;
 
-namespace MvcPlayground.Areas.BaseballTeams.Controllers
+namespace MvcPlayground.Areas.Baseball.Controllers
 {
     [Screen]
-    public class CardinalsController : Controller
+    public class TeamNamesController : Controller
     {
-        [Get("/Cardinals")]
+        [Get("/TeamNames")]
         public ActionResult Index()
         {
             return View();
         }
-
     }
 }

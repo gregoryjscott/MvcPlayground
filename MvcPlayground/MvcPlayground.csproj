@@ -64,13 +64,14 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Areas\BaseballTeams\BaseballTeamsAreaRegistration.cs" />
-    <Compile Include="Areas\BaseballTeams\Controllers\CardinalsController.cs" />
-    <Compile Include="Areas\BaseballTeams\Models\Cardinals.cs" />
-    <Compile Include="Areas\BaseballTeams\Models\Manager.cs" />
-    <Compile Include="Areas\BaseballTeams\Models\Player.cs" />
-    <Compile Include="Areas\BaseballTeams\Models\Team.cs" />
-    <Compile Include="Areas\BaseballTeams\Models\TeamName.cs" />
+    <Compile Include="Areas\Baseball\BaseballTeamsAreaRegistration.cs" />
+    <Compile Include="Areas\Baseball\Controllers\TeamNamesController.cs" />
+    <Compile Include="Areas\Baseball\Controllers\TeamsController.cs" />
+    <Compile Include="Areas\Baseball\Models\Manager.cs" />
+    <Compile Include="Areas\Baseball\Models\Player.cs" />
+    <Compile Include="Areas\Baseball\Models\Team.cs" />
+    <Compile Include="Areas\Baseball\Models\TeamName.cs" />
+    <Compile Include="Areas\Baseball\Models\Teams\Cardinals.cs" />
     <Compile Include="Areas\Security\Controllers\AccountUpdatesController.cs" />
     <Compile Include="Areas\Security\Controllers\UsersController.cs" />
     <Compile Include="Areas\Security\Controllers\SessionsController.cs" />
@@ -185,7 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\BaseballTeams\Views\Shared\" />
+    <Folder Include="Areas\Baseball\Views\Shared\" />
     <Folder Include="Areas\Security\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
@@ -210,7 +211,7 @@
     <Content Include="Views\Shared\_ScreenTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\BaseballTeams\Views\Web.config" />
+    <Content Include="Areas\Baseball\Views\Web.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

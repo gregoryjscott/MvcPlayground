@@ -1,4 +1,4 @@
-﻿namespace MvcPlayground.Areas.BaseballTeams.Models
+namespace MvcPlayground.Areas.Baseball.Models.Teams
 {
     public static class Cardinals
     {
