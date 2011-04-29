@@ -1,16 +1,21 @@
 ﻿namespace MvcPlayground.Areas.BaseballTeams.Models
 {
-    public class Cardinals
+    public static class Cardinals
     {
-        public static Manager Manager { get { return new Manager {Name = "Tony La Russa"}; } }
-        public static Player[] Roster =
-            new[]
+        // TODO - would be cool to scrape this data from mlb.com/...
+
+        public static Team Team =
+            new Team
                 {
-                    new Player
-                        {
-                            Name = "Albert Pujols",
-                            Team = Team.Cardinals
-                        }
+                    Manager = new Manager {Name = "Tony La Russa"},
+                    Players = new[]
+                                  {
+                                      new Player
+                                          {
+                                              Name = "Albert Pujols",
+                                              TeamName = TeamName.Cardinals
+                                          }
+                                  }
                 };
     }
 }

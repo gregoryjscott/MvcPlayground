@@ -1,11 +1,9 @@
 ﻿using System.Web.Mvc;
-using MvcPlayground.Models;
 using RestMvc.Attributes;
 using System.Linq;
 
 namespace MvcPlayground.Controllers
 {
-    [Screen]
     public class AreasController : Controller
     {
         [Get("/Areas/{id}")]

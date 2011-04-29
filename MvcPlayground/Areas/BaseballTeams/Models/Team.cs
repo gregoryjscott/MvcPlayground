@@ -1,7 +1,8 @@
 ﻿namespace MvcPlayground.Areas.BaseballTeams.Models
 {
-    public enum Team
+    public class Team
     {
-        Cardinals
+        public Manager Manager { get; set; }
+        public Player[] Players { get; set; }
     }
 }

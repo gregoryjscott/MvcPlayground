@@ -3,6 +3,6 @@
     public class Player
     {
         public string Name { get; set; }
-        public Team Team { set; get; }
+        public TeamName TeamName { set; get; }
     }
 }

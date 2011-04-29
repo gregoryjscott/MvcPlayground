@@ -70,6 +70,7 @@
     <Compile Include="Areas\BaseballTeams\Models\Manager.cs" />
     <Compile Include="Areas\BaseballTeams\Models\Player.cs" />
     <Compile Include="Areas\BaseballTeams\Models\Team.cs" />
+    <Compile Include="Areas\BaseballTeams\Models\TeamName.cs" />
     <Compile Include="Areas\Security\Controllers\AccountUpdatesController.cs" />
     <Compile Include="Areas\Security\Controllers\UsersController.cs" />
     <Compile Include="Areas\Security\Controllers\SessionsController.cs" />
