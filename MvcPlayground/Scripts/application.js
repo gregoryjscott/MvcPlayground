@@ -1,5 +1,7 @@
 ﻿$(function () {
     window.ApplicationView = Backbone.View.extend({
+        // TODO - shouldn't this have a render function?
+
         el: $("#main"),
 
         initialize: function () {
@@ -113,6 +115,8 @@
     });
 
     window.SecurityMenuView = Backbone.View.extend({
+        // TODO - shouldn't this have a render function?
+
         el: $("#securityMenu"),
 
         initialize: function () {
