@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
-namespace MvcTemplate.Areas.Security.Models.Users
+namespace MvcPlayground.Areas.Security.Models.Users
 {
     public class ChangePasswordModel
     {

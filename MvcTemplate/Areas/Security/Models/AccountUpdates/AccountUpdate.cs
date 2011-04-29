@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
-namespace MvcTemplate.Areas.Security.Models.AccountUpdates
+namespace MvcPlayground.Areas.Security.Models.AccountUpdates
 {
     public class AccountUpdate
     {

@@ -1,7 +1,7 @@
-﻿using System.Net;
+using System.Net;
 using System.Web.Mvc;
 
-namespace MvcTemplate.Filters
+namespace MvcPlayground.Filters
 {
     public class HandleAjaxExceptionAttribute : ActionFilterAttribute
     {

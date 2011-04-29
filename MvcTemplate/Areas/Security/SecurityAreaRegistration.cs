@@ -1,6 +1,6 @@
-﻿using System.Web.Mvc;
+using System.Web.Mvc;
 
-namespace MvcTemplate.Areas.Security
+namespace MvcPlayground.Areas.Security
 {
     public class SecurityAreaRegistration : AreaRegistration
     {

@@ -1,11 +1,11 @@
-﻿using System.Web.Mvc;
-using MvcTemplate.Areas.Security.Models;
-using MvcTemplate.Areas.Security.Models.Sessions;
-using MvcTemplate.Areas.Security.Tasks.Sessions;
-using MvcTemplate.Filters;
+using System.Web.Mvc;
+using MvcPlayground.Areas.Security.Models;
+using MvcPlayground.Areas.Security.Models.Sessions;
+using MvcPlayground.Areas.Security.Tasks.Sessions;
+using MvcPlayground.Filters;
 using Simpler;
 
-namespace MvcTemplate.Areas.Security.Controllers
+namespace MvcPlayground.Areas.Security.Controllers
 {
     [HandleAjaxException]
     public class SessionsController : Controller

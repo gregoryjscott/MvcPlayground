@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Security.Principal;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
-using MvcTemplate.Areas.Security.Models;
-using MvcTemplate.Areas.Security.Models.Sessions;
-using MvcTemplate.Areas.Security.Models.Users;
-using MvcTemplate.Models;
+using MvcPlayground.Areas.Security.Models;
+using MvcPlayground.Areas.Security.Models.Sessions;
+using MvcPlayground.Areas.Security.Models.Users;
 
-namespace MvcTemplate.Controllers
+namespace MvcPlayground._to_be_deleted.Controllers
 {
     public class AccountController : Controller
     {

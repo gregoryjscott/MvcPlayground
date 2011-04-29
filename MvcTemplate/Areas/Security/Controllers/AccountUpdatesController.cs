@@ -1,9 +1,9 @@
-﻿using System.Web.Mvc;
-using MvcTemplate.Areas.Security.Models;
-using MvcTemplate.Areas.Security.Models.AccountUpdates;
+using System.Web.Mvc;
+using MvcPlayground.Areas.Security.Models;
+using MvcPlayground.Areas.Security.Models.AccountUpdates;
 using RestMvc.Attributes;
 
-namespace MvcTemplate.Areas.Security.Controllers
+namespace MvcPlayground.Areas.Security.Controllers
 {
     public class AccountUpdatesController : Controller
     {

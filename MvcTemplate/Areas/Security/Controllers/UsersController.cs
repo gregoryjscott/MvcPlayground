@@ -1,12 +1,7 @@
-﻿using System.Web.Mvc;
-using System.Web.Security;
-using MvcTemplate.Areas.Security.Models;
-using MvcTemplate.Areas.Security.Models.Users;
-using MvcTemplate.Areas.Security.Tasks.Users;
-using MvcTemplate.Filters;
-using Simpler;
+using System.Web.Mvc;
+using MvcPlayground.Filters;
 
-namespace MvcTemplate.Areas.Security.Controllers
+namespace MvcPlayground.Areas.Security.Controllers
 {
     [AjaxAuthorize]
     [HandleAjaxException]

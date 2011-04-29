@@ -1,7 +1,7 @@
-﻿using System.Web.Mvc;
-using MvcTemplate.Results;
+using System.Web.Mvc;
+using MvcPlayground.Results;
 
-namespace MvcTemplate.Filters
+namespace MvcPlayground.Filters
 {
     public class AjaxAuthorizeAttribute : AuthorizeAttribute
     {

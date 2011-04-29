@@ -1,10 +1,8 @@
-﻿using System;
-using MvcTemplate.Areas.Security.Models;
-using MvcTemplate.Areas.Security.Models.Sessions;
-using MvcTemplate.Models;
+using MvcPlayground.Areas.Security.Models;
+using MvcPlayground.Areas.Security.Models.Sessions;
 using Simpler;
 
-namespace MvcTemplate.Areas.Security.Tasks.Sessions
+namespace MvcPlayground.Areas.Security.Tasks.Sessions
 {
     public class CreateSession : Task
     {

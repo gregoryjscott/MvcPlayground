@@ -1,7 +1,6 @@
-﻿using System.Web.Mvc;
-using RestMvc.Attributes;
+using System.Web.Mvc;
 
-namespace MvcTemplate.Controllers
+namespace MvcPlayground.Controllers
 {
     public class HomeController : Controller
     {

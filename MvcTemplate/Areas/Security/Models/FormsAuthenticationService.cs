@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System;
 using System.Web.Security;
 
-namespace MvcTemplate.Areas.Security.Models
+namespace MvcPlayground.Areas.Security.Models
 {
     public interface IFormsAuthenticationService
     {

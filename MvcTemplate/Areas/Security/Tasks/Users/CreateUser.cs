@@ -1,10 +1,9 @@
-﻿using System.Web.Security;
-using MvcTemplate.Areas.Security.Models;
-using MvcTemplate.Areas.Security.Models.Users;
-using MvcTemplate.Models;
+using System.Web.Security;
+using MvcPlayground.Areas.Security.Models;
+using MvcPlayground.Areas.Security.Models.Users;
 using Simpler;
 
-namespace MvcTemplate.Areas.Security.Tasks.Users
+namespace MvcPlayground.Areas.Security.Tasks.Users
 {
     public class CreateUser : Task
     {
