@@ -7,12 +7,12 @@ using System.Linq;
 namespace MvcPlayground.Areas.Baseball.Controllers
 {
     [Screen]
-    public class TeamsController : Controller
+    public class TeamNamesController : Controller
     {
-        [Get("/Teams/{id}")]
-        public JsonResult Show(string id)
+        [Get("/TeamNames")]
+        public JsonResult Index()
         {
-            return Json(Mlb.Teams.Select(team => team.Name == id));
+            return Json(Mlb.Teams.Select(team => team.Name));
         }
     }
 }
