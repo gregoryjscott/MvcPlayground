@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>MVC Template</title>
+
+        <!-- css -->
+        <link href="@Url.Content("~/Content/themes/aristo/jquery-ui.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/blueprint/grid.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/application.css")" rel="stylesheet" type="text/css" />
+
+        <!-- templates -->
+        <script id="moduleTemplate" type="text/html">@Html.Partial("_ModuleTemplate")</script>
+        <script id="screenTemplate" type="text/html">@Html.Partial("_ScreenTemplate")</script>
+
+        <!-- referenced js -->
+        <script src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery-ui.min.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.form.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.tmpl.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/underscore.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/backbone.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/knockout-1.2.0.debug.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/knockout.mapping.js")" type="text/javascript"></script>
+
+        <!-- execute the application -->
+        <script src="@Url.Content("~/Scripts/application.js")" type="text/javascript"></script>
+    </head>
+
+    <body>
+        <header>
+            <h1 id="logo">{logo}</h1>
+
+            @Html.Partial("_SecurityMenu")
+        </header>
+
+        <section id="main">
+        </section>
+
+        <!-- TODO - should probably rename this to userIsAlreadyAuthenticated. -->
+        @Html.Hidden("userIsAuthenticated", Request.IsAuthenticated)
+
+        @if (Request.IsAuthenticated)
+        {
+            @Html.Hidden("authenticatedUser", Context.User.Identity.Name)
+        }
+
+        @Html.Partial("_LoginDialog")
+
+        @Html.Partial("_MyAccount")
+    </body>
+</html>

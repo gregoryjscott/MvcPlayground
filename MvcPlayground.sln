@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcPlayground", "MvcTemplate\MvcPlayground.csproj", "{0269B1CC-583E-4C50-B2DE-ED1E6F4D8515}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcPlayground", "MvcPlayground\MvcPlayground.csproj", "{0269B1CC-583E-4C50-B2DE-ED1E6F4D8515}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
