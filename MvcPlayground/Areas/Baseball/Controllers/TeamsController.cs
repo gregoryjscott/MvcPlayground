@@ -1,14 +1,18 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using MvcPlayground.Areas.Baseball.Models;
-using MvcPlayground.Models;
 using RestMvc.Attributes;
 
 namespace MvcPlayground.Areas.Baseball.Controllers
 {
-    [Screen]
     public class TeamsController : Controller
     {
+        [Get("/Teams")]
+        public JsonResult Index()
+        {
+            return Json(Mlb.Teams);
+        }
+
         [Get("/Teams/{id}")]
         public JsonResult Show(string id)
         {

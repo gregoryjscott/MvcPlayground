@@ -91,7 +91,6 @@
     <Compile Include="Models\Area.cs" />
     <Compile Include="Models\Areas.cs" />
     <Compile Include="Models\Screen.cs" />
-    <Compile Include="Models\ScreenAttribute.cs" />
     <Compile Include="Results\HttpForbiddenResult.cs" />
     <Compile Include="_to_be_deleted\Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
