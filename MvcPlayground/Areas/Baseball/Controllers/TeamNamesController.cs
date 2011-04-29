@@ -1,6 +1,8 @@
 ﻿using System.Web.Mvc;
+using MvcPlayground.Areas.Baseball.Models;
 using MvcPlayground.Models;
 using RestMvc.Attributes;
+using System.Linq;
 
 namespace MvcPlayground.Areas.Baseball.Controllers
 {
@@ -8,9 +10,9 @@ namespace MvcPlayground.Areas.Baseball.Controllers
     public class TeamsController : Controller
     {
         [Get("/Teams/{id}")]
-        public ActionResult Show(string id)
+        public JsonResult Show(string id)
         {
-            return View();
+            return Json(Mlb.Teams.Select(team => team.Name == id));
         }
     }
 }
