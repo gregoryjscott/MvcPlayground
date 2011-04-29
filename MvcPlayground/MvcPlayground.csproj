@@ -67,11 +67,10 @@
     <Compile Include="Areas\Baseball\BaseballTeamsAreaRegistration.cs" />
     <Compile Include="Areas\Baseball\Controllers\TeamNamesController.cs" />
     <Compile Include="Areas\Baseball\Controllers\TeamsController.cs" />
+    <Compile Include="Areas\Baseball\Models\Mlb.cs" />
     <Compile Include="Areas\Baseball\Models\Manager.cs" />
     <Compile Include="Areas\Baseball\Models\Player.cs" />
     <Compile Include="Areas\Baseball\Models\Team.cs" />
-    <Compile Include="Areas\Baseball\Models\TeamName.cs" />
-    <Compile Include="Areas\Baseball\Models\Teams\Cardinals.cs" />
     <Compile Include="Areas\Security\Controllers\AccountUpdatesController.cs" />
     <Compile Include="Areas\Security\Controllers\UsersController.cs" />
     <Compile Include="Areas\Security\Controllers\SessionsController.cs" />
