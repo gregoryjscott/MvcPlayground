@@ -9,20 +9,20 @@
 
     window.Screen = Backbone.Model.extend({
         //title: ko.observable(),
-        status: ko.observable(),
+        //status: ko.observable(),
 
         initialize: function () {
             _.bindAll(this, 'validate', 'save');
 
             //this.title() = this.get("title");
-            this.status() = this.get("status");
+            //this.status() = this.get("status");
         },
 
         validate: function (attributes) {
         },
 
         save: function (attributes, options) {
-            this.set("status") = this.status();
+            //this.set("status") = this.status();
 
             // Call the original implementation now.
             Backbone.Model.prototype.save.call(this, attributes, options);
@@ -172,10 +172,11 @@
             this.securityMenuView = new SecurityMenuView;
             this.myAccountView = new MyAccountView;
 
+            // TODO - fill this array on the server.
             this.area1 = new Screens([
-                { title: "Screen 1", url: "/Area1/Screen1", status: "New" },
-                { title: "Screen 2", url: "/Area1/Screen2", status: "New" },
-                { title: "Screen 3", url: "/Area1/Screen3", status: "New" }
+                { title: "Screen 1", url: "/Area1/Screen1", status: ko.observable("New") },
+                { title: "Screen 2", url: "/Area1/Screen2", status: ko.observable("New") },
+                { title: "Screen 3", url: "/Area1/Screen3", status: ko.observable("New") }
             ]);
 
             $.ajaxSetup({ cache: false });
@@ -214,18 +215,14 @@
             $("#moduleTemplate").tmpl().appendTo(this.el);
 
             // Setup the module data apply bindings.
-            var moduleModel = {
-                // TODO - this didn't work: '[{ id: "Infielders", content: "second base, shortstop" }]'
+            var area1ViewModel = {
                 screens: ko.observableArray()
-                //screens: ko.observableArray(this.area1.models)
             };
 
-            _.each(this.area1.models, function (screen) {
-                moduleModel.screens.push(screen.attributes);
+            this.area1.forEach(function (screen) {
+                area1ViewModel.screens.push(screen.attributes);
             });
-            //moduleModel.screens.push({ title: "Infielders", status: "second base, shortstop" });
-            //moduleModel.screens.push({ title: "Outfielders", status: "left, center, right" });
-            ko.applyBindings(moduleModel);
+            ko.applyBindings(area1ViewModel);
 
             this.$("#accordion").accordion();
         }
