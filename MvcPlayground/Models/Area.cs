@@ -1,5 +1,3 @@
-using MvcPlayground.Areas.Security.Models;
-
 namespace MvcPlayground.Models
 {
     public class Area

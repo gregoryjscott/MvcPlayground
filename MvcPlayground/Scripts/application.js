@@ -1,64 +1,38 @@
 ﻿$(function () {
-    window.ApplicationView = Backbone.View.extend({
-        // TODO - shouldn't this have a render function?
-
-        el: $("#main"),
-
-        initialize: function () {
-            _.bindAll(this, 'showLogin', 'showMyAccount', 'showContent');
-
-            this.loginView = new LoginView;
-            this.securityMenuView = new SecurityMenuView;
-            this.myAccountView = new MyAccountView;
-
-            $.ajaxSetup({ cache: false });
-
-            // Add a handler for anytime an ajax error occurs and see if its a 403 (that was thrown by an ajax controller action).
-            $("body").ajaxError(function (event, request, ajaxOptions, thrownError) {
-                if (request.status == 403) {
-                    this.showLogin();
-                }
-                else {
-                    alert('An unexpected error occurred on the server.  StatusCode: ' + request.status + ', Error: ' + request.responseText);
-                }
-            });
-
-            // See if the user has been authenticated.
-            var userIsAuthenticated = $("input[name*='userIsAuthenticated']").val();
-            if (userIsAuthenticated != "True") {
-                this.showLogin();
-            }
-            else {
-                this.showContent();
-            }
-        },
-
-        showLogin: function () {
-            this.loginView.render();
-        },
-
-        showMyAccount: function () {
-            this.myAccountView.render();
-        },
-
-        showContent: function () {
-            // Add the module template to the DOM.
-            $(this.el).empty();
-            $("#moduleTemplate").tmpl().appendTo(this.el);
-
-            // Setup the module data apply bindings.
-            var moduleModel = {
-                // TODO - this didn't work: '[{ id: "Infielders", content: "second base, shortstop" }]'
-                screens: ko.observableArray()
-            };
-            moduleModel.screens.push({ id: "Infielders", content: "second base, shortstop" });
-            moduleModel.screens.push({ id: "Outfielders", content: "left, center, right" });
-            ko.applyBindings(moduleModel);
-
-            this.$("#accordion").accordion();
+    // Models
+    window.AccountUpdate = Backbone.Model.extend({
+        // We will only be calling creating AccountUpdates.
+        url: function () {
+            return '/Security/AccountUpdates';
         }
     });
 
+    window.Screen = Backbone.Model.extend({
+        //title: ko.observable(),
+        status: ko.observable(),
+
+        initialize: function () {
+            _.bindAll(this, 'validate', 'save');
+
+            //this.title() = this.get("title");
+            this.status() = this.get("status");
+        },
+
+        validate: function (attributes) {
+        },
+
+        save: function (attributes, options) {
+            this.set("status") = this.status();
+
+            // Call the original implementation now.
+            Backbone.Model.prototype.save.call(this, attributes, options);
+        }
+    });
+
+    window.Screens = Backbone.Collection.extend({
+    });
+
+    // Views
     window.LoginView = Backbone.View.extend({
         el: $("#loginDialog"),
 
@@ -141,23 +115,6 @@
         }
     });
 
-    window.MyAccount = Backbone.Model.extend({
-        // We will only be calling creating AccountUpdates.
-        url: function () {
-            return '/Security/AccountUpdates';
-        },
-
-        initialize: function () {
-            _.bindAll(this, 'validate', 'somethingElse');
-        },
-
-        validate: function (attributes) {
-        },
-
-        somethingElse: function (attributes) {
-        }
-    });
-
     window.MyAccountView = Backbone.View.extend({
         el: $("#myAccountDialog"),
 
@@ -193,43 +150,87 @@
             var oldPassword = this.$('#OldPassword').val();
             var newPassword = this.$('#NewPassword').val();
             var confirmPassword = this.$('#ConfirmPassword').val();
-            var myAccount = new MyAccount({
+            var accountUpdate = new AccountUpdate({
                 OldPassword: oldPassword,
                 NewPassword: newPassword,
                 ConfirmPassword: confirmPassword
             });
 
-            myAccount.save();
-
-            //            this.$("#myAccountForm").ajaxSubmit({
-            //                dataType: 'json',
-            //                success: function () {
-            //                    if (data.Success) {
-            //                        alert("Success!");
-            //                    }
-            //                    else {
-            //                        alert("Fail!");
-            //                    }
-            //                }
-            //            })
+            accountUpdate.save();
         }
     });
 
-    window.Area = Backbone.Model.extend({
+    window.ApplicationView = Backbone.View.extend({
+        // TODO - shouldn't this have a render function?
+
+        el: $("#main"),
+
         initialize: function () {
-            _.bindAll(this, 'validate', 'somethingElse');
+            _.bindAll(this, 'showLogin', 'showMyAccount', 'showContent');
+
+            this.loginView = new LoginView;
+            this.securityMenuView = new SecurityMenuView;
+            this.myAccountView = new MyAccountView;
+
+            this.area1 = new Screens([
+                { title: "Screen 1", url: "/Area1/Screen1", status: "New" },
+                { title: "Screen 2", url: "/Area1/Screen2", status: "New" },
+                { title: "Screen 3", url: "/Area1/Screen3", status: "New" }
+            ]);
+
+            $.ajaxSetup({ cache: false });
+
+            // Add a handler for anytime an ajax error occurs and see if its a 403 (that was thrown by an ajax controller action).
+            $("body").ajaxError(function (event, request, ajaxOptions, thrownError) {
+                if (request.status == 403) {
+                    this.showLogin();
+                }
+                else {
+                    alert('An unexpected error occurred on the server.  StatusCode: ' + request.status + ', Error: ' + request.responseText);
+                }
+            });
+
+            // See if the user has been authenticated.
+            var userIsAuthenticated = $("input[name*='userIsAuthenticated']").val();
+            if (userIsAuthenticated != "True") {
+                this.showLogin();
+            }
+            else {
+                this.showContent();
+            }
         },
 
-        validate: function (attributes) {
+        showLogin: function () {
+            this.loginView.render();
         },
 
-        somethingElse: function (attributes) {
+        showMyAccount: function () {
+            this.myAccountView.render();
+        },
+
+        showContent: function () {
+            // Add the module template to the DOM.
+            $(this.el).empty();
+            $("#moduleTemplate").tmpl().appendTo(this.el);
+
+            // Setup the module data apply bindings.
+            var moduleModel = {
+                // TODO - this didn't work: '[{ id: "Infielders", content: "second base, shortstop" }]'
+                screens: ko.observableArray()
+                //screens: ko.observableArray(this.area1.models)
+            };
+
+            _.each(this.area1.models, function (screen) {
+                moduleModel.screens.push(screen.attributes);
+            });
+            //moduleModel.screens.push({ title: "Infielders", status: "second base, shortstop" });
+            //moduleModel.screens.push({ title: "Outfielders", status: "left, center, right" });
+            ko.applyBindings(moduleModel);
+
+            this.$("#accordion").accordion();
         }
     });
 
-    window.Areas = Backbone.Collection.extend({
-        url: '/Areas'
-    });
-
+    // Create the application view.
     window.ApplicationView = new ApplicationView;
 });
