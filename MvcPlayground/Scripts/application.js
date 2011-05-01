@@ -8,21 +8,20 @@
     });
 
     window.Screen = Backbone.Model.extend({
-        //title: ko.observable(),
-        //status: ko.observable(),
-
         initialize: function () {
             _.bindAll(this, 'validate', 'save');
 
-            //this.title() = this.get("title");
-            //this.status() = this.get("status");
+            // The Url should be passed into the constructor.
+            // TODO - I assume this is necessary?
+            this.url = this.get("url");
         },
 
         validate: function (attributes) {
         },
 
         save: function (attributes, options) {
-            //this.set("status") = this.status();
+            // Before saving, create/update the Backbone attribute that matches the Knockout observable.
+            this.set("status") = this.status();
 
             // Call the original implementation now.
             Backbone.Model.prototype.save.call(this, attributes, options);
@@ -214,11 +213,10 @@
             $(this.el).empty();
             $("#moduleTemplate").tmpl().appendTo(this.el);
 
-            // Setup the module data apply bindings.
+            // Setup the view model and apply bindings.
             var area1ViewModel = {
                 screens: ko.observableArray()
             };
-
             this.area1.forEach(function (screen) {
                 area1ViewModel.screens.push(screen.attributes);
             });

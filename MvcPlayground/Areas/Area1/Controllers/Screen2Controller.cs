@@ -8,7 +8,13 @@ namespace MvcPlayground.Areas.Area1.Controllers
         [Get("/Area1/Screen2")]
         public JsonResult Show()
         {
-            return Json(new { Content = "Screen 2" });
+            return Json(new { content = "Screen 2" });
+        }
+
+        [Put("/Area1/Screen2")]
+        public JsonResult Update()
+        {
+            return Json(new { success = true });
         }
     }
 }
